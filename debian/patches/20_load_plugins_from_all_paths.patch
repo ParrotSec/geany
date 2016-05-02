@@ -1,0 +1,21 @@
+From: Evgeni Golov <evgeni@debian.org>
+Description: Search for plugins in /usr/lib/geany
+ Since debhelper compat level 9, plugins are installed and searched in
+ /usr/lib/<arch-triplet>/geany.
+ Current geany-plugins packaging, and more important, 3rd party stuff
+ is still using /usr/lib/geany, thus search there too.
+Forwarded: not-needed
+Last-Update: 2011-11-05
+
+Index: geany/src/plugins.c
+===================================================================
+--- geany.orig/src/plugins.c	2012-06-18 22:16:36.346642265 +0200
++++ geany/src/plugins.c	2012-06-18 22:20:21.032298372 +0200
+@@ -1171,6 +1171,7 @@ static void load_all_plugins(void)
+ 
+ 	/* finally load plugins from $prefix/lib/geany */
+ 	load_plugins_from_path(plugin_path_system);
++	load_plugins_from_path("/usr/lib/geany");
+ 
+ 	/* It is important to sort any plugins that are proxied after their proxy because
+ 	 * pm_populate() needs the proxy to be loaded and active (if selected by user) in order

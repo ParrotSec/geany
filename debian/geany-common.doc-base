@@ -1,0 +1,13 @@
+Document: geany
+Title: geany manual
+Author: Enrico Tröger, Nick Treleaven, Frank Lanitz
+Abstract: This document describes the usage of the Geany IDE, it also 
+ describes how to get, compile and install geany. 
+Section: Editors
+
+Format: text
+Files: /usr/share/doc/geany/manual.txt.gz
+
+Format: HTML
+Index: /usr/share/doc/geany/html/index.html
+Files: /usr/share/doc/geany/html/*

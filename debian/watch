@@ -1,0 +1,6 @@
+version=3
+
+#http://sf.net/geany/geany-(.*)\.tar\.gz
+
+opts=dversionmangle=s/\+dfsg(\.\d+)?$//,pgpsigurlmangle=s/$/.sig/,repacksuffix=+dfsg \
+http://download.geany.org/geany-(.*)\.tar\.gz

@@ -1,0 +1,22 @@
+Author: Damián Viano <des@debian.org>
+Description: change default config file to include debian specific files:
+.debdiff and .dpatch files as diffs
+control as config file
+Index: geany/data/filetype_extensions.conf
+===================================================================
+--- geany.orig/data/filetype_extensions.conf	2012-06-18 22:16:36.258641616 +0200
++++ geany/data/filetype_extensions.conf	2012-06-18 22:20:08.908209011 +0200
+@@ -17,11 +17,11 @@ C#=*.cs;
+ CMake=CMakeLists.txt;*.cmake;*.ctest;
+ COBOL=*.cob;*.cpy;*.cbl;*.cobol;
+ CoffeeScript=*.coffee;Cakefile;*.Cakefile;*.coffee.erb;*.iced;*.iced.erb;
+-Conf=*.conf;*.ini;config;*rc;*.cfg;*.desktop;*.properties;
++Conf=*.conf;*.ini;config;*rc;*.cfg;*.desktop;*.properties;control;
+ CSS=*.css;
+ Cython=*.pyx;*.pxd;*.pxi;
+ D=*.d;*.di;
+-Diff=*.diff;*.patch;*.rej;
++Diff=*.diff;*.patch;*.rej;*.debdiff;*.dpatch;
+ Docbook=*.docbook;
+ Erlang=*.erl;*.hrl;
+ F77=*.f;*.for;*.ftn;*.f77;*.F;*.FOR;*.FTN;*.fpp;*.FPP;

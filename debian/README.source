@@ -1,0 +1,14 @@
+Geany packaging sources are maintained in git, using git-buildpackage with a
+branch structure as follows:
+ - master: Contains the latest and greatest version including packaging. can go
+   into either unstable or experimental, depending on whether a freeze is
+   ongoing.
+ - usptream: Contains
+ - pristine-tar: Contains pristine-tar deltas
+ - $debrelease: Packaging for Debian release $debrelease. This would be for
+   uploading minimal fixes to unstable during a freeze, or stable release updates
+ - $debrelease-backports: Packaging for backports.
+ - ppa/$uburelease: Packaging for uploading to Ubuntu PPA for $uburelease
+ - ubuntu: Packaging delta for Ubuntu, if any.
+
+ -- Chow Loong Jin <hyperair@debian.org>, Fri, 10 May 2013 15:26:35 +0800

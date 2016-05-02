@@ -1,0 +1,16 @@
+geany (0.11-1) unstable; urgency=low
+
+  Tab is now used for construct completion (for, if, etc.), but
+  it is configurable with the new 'Complete construct' keybinding.
+
+  Template files are now stored in ~/.geany/templates/ and the 'template.'
+  filename prefix is no longer used. You will need to move any custom
+  template files you have.
+
+  Inserting a file header is now optional for filetype templates.  Use the
+  string '{fileheader}' to mark where the file header should be placed.
+
+  Drag'n'Drop of text inside the editor widget will now move the text
+  instead of copying it.
+
+ -- Damián Viano <des@debian.org>  Thu, 24 May 2007 15:12:58 -0300

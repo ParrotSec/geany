@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ --with=autoreconf --parallel
+
+override_dh_autoreconf:
+	NOCONFIGURE=1 dh_autoreconf ./autogen.sh
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-vte --enable-the-force
+	sed -i -r 's,^sys_lib_dlsearch_path_spec="(.*)$$,sys_lib_dlsearch_path_spec="/usr/lib /lib \1,' $(CURDIR)/libtool
+
+override_dh_auto_install:
+	dh_auto_install
+	#chrpath -d $(CURDIR)/debian/tmp/usr/bin/geany \
+	#	$(CURDIR)/debian/tmp/usr/lib/geany/*.so
+	-rm -f $(CURDIR)/debian/tmp/usr/share/geany/GPL-2
+	-rm -f $(CURDIR)/debian/tmp/usr/share/doc/geany/COPYING \
+	       $(CURDIR)/debian/tmp/usr/share/doc/geany/ScintillaLicense.txt \
+	       $(CURDIR)/debian/tmp/usr/share/doc/geany/AUTHORS \
+	       $(CURDIR)/debian/tmp/usr/share/doc/geany/ChangeLog
+	-rm -f $(CURDIR)/debian/tmp/usr/lib/geany/*.la
+	-rm -f $(CURDIR)/debian/tmp/usr/lib/*/geany/*.la
+	-rm -f $(CURDIR)/debian/tmp/usr/lib/*/libgeany.la
+
+override_dh_install:
+	dh_install --list-missing
+
+override_dh_gencontrol:
+	echo -n "geany:Provides=geany-abi-`grep 'define GEANY_ABI_VERSION' src/plugindata.h |awk '{print $$3}' |sed 's#[^0-9]##g'`," \
+		>> debian/geany.substvars
+	echo " geany-api-`grep 'define GEANY_API_VERSION' src/plugindata.h |awk '{print $$3}' |sed 's#[^0-9]##g'`" \
+		>> debian/geany.substvars
+	dh_gencontrol

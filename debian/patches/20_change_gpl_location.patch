@@ -1,0 +1,15 @@
+Author: Damián Viano <des@debian.org>
+Description: Small patch to use common-licenses
+Index: geany/src/about.c
+===================================================================
+--- geany.orig/src/about.c	2012-06-18 22:16:36.334642176 +0200
++++ geany/src/about.c	2012-06-18 22:20:03.740170922 +0200
+@@ -418,7 +418,7 @@
+ 	label = gtk_label_new(_("License"));
+ 	gtk_widget_show(label);
+ 
+-	g_snprintf(buffer, sizeof(buffer), "%s" G_DIR_SEPARATOR_S "GPL-2", app->datadir);
++	g_snprintf(buffer, sizeof(buffer), "/usr/share/common-licenses/GPL-2");
+ 
+ 	g_file_get_contents(buffer, &license_text, NULL, NULL);
+ 	if (license_text == NULL)
