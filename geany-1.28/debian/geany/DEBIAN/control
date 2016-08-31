@@ -1,0 +1,27 @@
+Package: geany
+Version: 1.28-1parrot0
+Architecture: amd64
+Maintainer: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+Installed-Size: 3258
+Depends: libatk1.0-0 (>= 1.12.4), libc6 (>= 2.15), libcairo2 (>= 1.8.0), libfontconfig1 (>= 2.11), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:3.0), libgdk-pixbuf2.0-0 (>= 2.22.0), libglib2.0-0 (>= 2.41.1), libgtk2.0-0 (>= 2.22.0), libpango-1.0-0 (>= 1.18.0), libpangocairo-1.0-0 (>= 1.14.0), libpangoft2-1.0-0 (>= 1.14.0), libstdc++6 (>= 5.2), geany-common (= 1.28-1parrot0)
+Suggests: libvte9, doc-base
+Breaks: geany-plugins-common (<< 0.21)
+Provides: geany-abi-71, geany-api-228
+Section: devel
+Priority: optional
+Homepage: http://www.geany.org
+Description: fast and lightweight IDE
+ Geany is a small and lightweight integrated development environment.
+ It was developed to provide a small and fast IDE, which has only a
+ few dependencies from other packages. It is using only the GTK2 toolkit
+ and therefore you need only the GTK2 runtime libraries to run Geany.
+ .
+ The basic features of Geany are:
+  - syntax highlighting
+  - code completion
+  - auto completion of constructs like if, for and while, XML and HTML
+  - call tips
+  - folding
+  - many supported filetypes like C, Java, PHP, HTML, Python, Perl, Pascal
+  - symbol lists
+  - embedded terminal emulation

@@ -1,0 +1,13 @@
+Package: geany-dbgsym
+Source: geany
+Version: 1.28-1parrot0
+Architecture: amd64
+Maintainer: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+Installed-Size: 5359
+Depends: geany (= 1.28-1parrot0)
+Section: debug
+Priority: extra
+Homepage: http://www.geany.org
+Description: Debug symbols for geany
+Auto-Built-Package: debug-symbols
+Build-Ids: 34f10ab8b873ec4b24ee834c43340eaac45014bc 5a27172a52353ea660a9a006524aa26183f3bc84 67fcbd71ef8d977ce241fe1d7dc929fa52b5af4f 8baf3d483aba0926062c6e796f53d112c7c74315 aea9f81949bbfae3a72c61dc460e5b442c3b4530 c26681285fb975b917a12e434a48ee80f032d38b cd6ab90ddafe3f0fa22d4c14075e9a09225b55b4 e6b272c9c2c0c16a6a069f5a759031ef92b14cb1

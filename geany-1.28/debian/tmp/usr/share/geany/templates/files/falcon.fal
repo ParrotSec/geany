@@ -1,0 +1,9 @@
+#!/usr/bin/falcon
+
+saying = List("Have", "a", "nice", "day")
+
+for elem in saying
+   >> elem
+   formiddle: >> " "
+   forlast: > "!"
+end
