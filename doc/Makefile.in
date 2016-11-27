@@ -101,6 +101,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/geany-binreloc.m4 \
 	$(top_srcdir)/m4/geany-mac-integration.m4 \
 	$(top_srcdir)/m4/geany-mingw.m4 \
 	$(top_srcdir)/m4/geany-plugins.m4 \
+	$(top_srcdir)/m4/geany-prog-cxx.m4 \
 	$(top_srcdir)/m4/geany-revision.m4 \
 	$(top_srcdir)/m4/geany-socket.m4 \
 	$(top_srcdir)/m4/geany-status.m4 \
@@ -425,8 +426,7 @@ doc_DATA = \
 	$(top_srcdir)/TODO
 
 DOCDIR = $(DESTDIR)$(docdir)
-EXTRA_DIST = geany.html geany.css geany.txt geany.1 makefile.win32 \
-	$(am__append_1)
+EXTRA_DIST = geany.html geany.css geany.txt geany.1 $(am__append_1)
 
 # API Documentation
 @WITH_DOXYGEN_TRUE@doxygen_sources = \
@@ -440,10 +440,10 @@ EXTRA_DIST = geany.html geany.css geany.txt geany.1 makefile.win32 \
 @WITH_DOXYGEN_TRUE@	$(doxygen_sources) \
 @WITH_DOXYGEN_TRUE@	$(top_srcdir)/src/*.[ch] \
 @WITH_DOXYGEN_TRUE@	$(top_srcdir)/plugins/geanyplugin.h \
-@WITH_DOXYGEN_TRUE@	$(top_srcdir)/tagmanager/src/tm_source_file.[ch] \
-@WITH_DOXYGEN_TRUE@	$(top_srcdir)/tagmanager/src/tm_workspace.[ch] \
-@WITH_DOXYGEN_TRUE@	$(top_srcdir)/tagmanager/src/tm_tag.h \
-@WITH_DOXYGEN_TRUE@	$(top_srcdir)/tagmanager/src/tm_parser.h
+@WITH_DOXYGEN_TRUE@	$(top_srcdir)/src/tagmanager/tm_source_file.[ch] \
+@WITH_DOXYGEN_TRUE@	$(top_srcdir)/src/tagmanager/tm_workspace.[ch] \
+@WITH_DOXYGEN_TRUE@	$(top_srcdir)/src/tagmanager/tm_tag.h \
+@WITH_DOXYGEN_TRUE@	$(top_srcdir)/src/tagmanager/tm_parser.h
 
 @WITH_DOXYGEN_TRUE@ALL_LOCAL_TARGETS = Doxyfile.stamp $(am__append_2)
 @WITH_DOXYGEN_TRUE@CLEAN_LOCAL_TARGETS = clean-api-docs-local \

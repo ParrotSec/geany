@@ -100,6 +100,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/geany-binreloc.m4 \
 	$(top_srcdir)/m4/geany-mac-integration.m4 \
 	$(top_srcdir)/m4/geany-mingw.m4 \
 	$(top_srcdir)/m4/geany-plugins.m4 \
+	$(top_srcdir)/m4/geany-prog-cxx.m4 \
 	$(top_srcdir)/m4/geany-revision.m4 \
 	$(top_srcdir)/m4/geany-socket.m4 \
 	$(top_srcdir)/m4/geany-status.m4 \
@@ -494,7 +495,6 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 EXTRA_DIST = \
-	makefile.win32 \
 	demoproxytest.px
 
 plugindir = $(libdir)/geany
@@ -553,13 +553,13 @@ splitwindow_la_LDFLAGS = -module -avoid-version -no-undefined
 @PLUGINS_TRUE@splitwindow_la_LIBADD = $(top_builddir)/src/libgeany.la $(GTK_LIBS)
 @MINGW_FALSE@AM_CPPFLAGS = -DDATADIR=\"$(datadir)\" -DGTK \
 @MINGW_FALSE@	-I$(top_srcdir)/src \
-@MINGW_FALSE@	-I$(top_srcdir)/tagmanager/src \
+@MINGW_FALSE@	-I$(top_srcdir)/src/tagmanager \
 @MINGW_FALSE@	-I$(top_srcdir)/scintilla/include $(GTK_CFLAGS) \
 @MINGW_FALSE@	$(PLUGIN_CFLAGS)
 
 # FIXME: why is this define different than the non-MINGW one?
 @MINGW_TRUE@AM_CPPFLAGS = -DGEANY_DATADIR=\"data\" -DGTK \
-@MINGW_TRUE@	-I$(top_srcdir)/src -I$(top_srcdir)/tagmanager/src \
+@MINGW_TRUE@	-I$(top_srcdir)/src -I$(top_srcdir)/src/tagmanager \
 @MINGW_TRUE@	-I$(top_srcdir)/scintilla/include $(GTK_CFLAGS) \
 @MINGW_TRUE@	$(PLUGIN_CFLAGS)
 
