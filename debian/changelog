@@ -1,3 +1,9 @@
+geany (1.29-1) testing; urgency=medium
+
+  * New upstream version 1.29
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Sun, 27 Nov 2016 01:32:30 +0100
+
 geany (1.28-1parrot0) testing; urgency=medium
   [ Chow Loong Jin ]
   * [7f7df81] Imported Upstream version 1.28
