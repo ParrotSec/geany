@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.60])
-AC_INIT([Geany], [1.28],
+AC_INIT([Geany], [1.29],
 		[https://sourceforge.net/tracker/?group_id=153444&atid=787791])
 AC_CONFIG_SRCDIR([src/geany.h])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -30,11 +30,7 @@ AC_PROG_CC_C99
 AM_PROG_CC_C_O
 
 AC_PROG_CXX
-# check for C++ compiler explicitly and fail if none is found, do this check
-# after AC_PROG_CXX has set the CXX environment variable
-if ! which $CXX >/dev/null 2>&1; then
-	AC_MSG_ERROR([No C++ compiler found. Please install a C++ compiler.])
-fi
+GEANY_PROG_CXX
 
 AC_PROG_INSTALL
 AC_PROG_LN_S
@@ -147,13 +143,11 @@ AC_CONFIG_FILES([
 		icons/tango/32x32/Makefile
 		icons/tango/48x48/Makefile
 		icons/tango/scalable/Makefile
-		tagmanager/Makefile
-		tagmanager/ctags/Makefile
-		tagmanager/mio/Makefile
-		tagmanager/src/Makefile
+		ctags/Makefile
 		scintilla/Makefile
 		scintilla/include/Makefile
 		src/Makefile
+		src/tagmanager/Makefile
 		plugins/Makefile
 		po/Makefile.in
 		data/Makefile

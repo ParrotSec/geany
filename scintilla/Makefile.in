@@ -97,6 +97,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/geany-binreloc.m4 \
 	$(top_srcdir)/m4/geany-mac-integration.m4 \
 	$(top_srcdir)/m4/geany-mingw.m4 \
 	$(top_srcdir)/m4/geany-plugins.m4 \
+	$(top_srcdir)/m4/geany-prog-cxx.m4 \
 	$(top_srcdir)/m4/geany-revision.m4 \
 	$(top_srcdir)/m4/geany-socket.m4 \
 	$(top_srcdir)/m4/geany-status.m4 \
@@ -601,9 +602,7 @@ libscintilla_la_SOURCES = $(SRCS)
 AM_CPPFLAGS = -I$(top_srcdir) -I$(srcdir)/include -I$(srcdir)/src -I$(srcdir)/lexlib \
 	@GTK_CFLAGS@ @LIBGEANY_CFLAGS@
 
-EXTRA_DIST = gtk/scintilla-marshal.list License.txt README version.txt \
-	gtk/makefile.win32
-
+EXTRA_DIST = gtk/scintilla-marshal.list License.txt README version.txt
 all: all-recursive
 
 .SUFFIXES:

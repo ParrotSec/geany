@@ -103,6 +103,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/geany-binreloc.m4 \
 	$(top_srcdir)/m4/geany-mac-integration.m4 \
 	$(top_srcdir)/m4/geany-mingw.m4 \
 	$(top_srcdir)/m4/geany-plugins.m4 \
+	$(top_srcdir)/m4/geany-prog-cxx.m4 \
 	$(top_srcdir)/m4/geany-revision.m4 \
 	$(top_srcdir)/m4/geany-socket.m4 \
 	$(top_srcdir)/m4/geany-status.m4 \

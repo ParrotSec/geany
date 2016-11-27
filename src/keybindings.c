@@ -386,6 +386,9 @@ static void init_default_kb(void)
 	add_kb(group, GEANY_KEYS_EDITOR_DELETELINETOEND, NULL,
 		GDK_Delete, GDK_SHIFT_MASK | GEANY_PRIMARY_MOD_MASK, "edit_deletelinetoend",
 		_("Delete to line end"), NULL);
+	add_kb(group, GEANY_KEYS_EDITOR_DELETELINETOBEGINNING, NULL,
+		GDK_BackSpace, GDK_SHIFT_MASK | GEANY_PRIMARY_MOD_MASK, "edit_deletelinetobegin",
+		_("Delete to beginning of line"), NULL);
 	/* Note: transpose may fit better in format group, but that would break the API */
 	add_kb(group, GEANY_KEYS_EDITOR_TRANSPOSELINE, NULL,
 		0, 0, "edit_transposeline", _("_Transpose Current Line"), NULL);
@@ -1735,14 +1738,43 @@ static void focus_sidebar(void)
 }
 
 
+static GtkWidget *find_focus_widget(GtkWidget *widget)
+{
+	GtkWidget *focus = NULL;
+
+	if (GTK_IS_BIN(widget)) /* optimized simple case */
+		focus = find_focus_widget(gtk_bin_get_child(GTK_BIN(widget)));
+	else if (GTK_IS_CONTAINER(widget))
+	{
+		GList *children = gtk_container_get_children(GTK_CONTAINER(widget));
+		GList *node;
+
+		for (node = children; node && ! focus; node = node->next)
+			focus = find_focus_widget(node->data);
+		g_list_free(children);
+	}
+
+	/* Some containers handled above might not have children and be what we want to focus
+	 * (e.g. GtkTreeView), so focus that if possible and we don't have anything better */
+	if (! focus && gtk_widget_get_can_focus(widget))
+		focus = widget;
+
+	return focus;
+}
+
+
 static void focus_msgwindow(void)
 {
 	if (ui_prefs.msgwindow_visible)
 	{
 		gint page_num = gtk_notebook_get_current_page(GTK_NOTEBOOK(msgwindow.notebook));
-		GtkWidget *page = gtk_notebook_get_nth_page(GTK_NOTEBOOK(msgwindow.notebook), page_num);
+		GtkWidget *widget = gtk_notebook_get_nth_page(GTK_NOTEBOOK(msgwindow.notebook), page_num);
 
-		gtk_widget_grab_focus(gtk_bin_get_child(GTK_BIN(page)));
+		widget = find_focus_widget(widget);
+		if (widget)
+			gtk_widget_grab_focus(widget);
+		else
+			utils_beep();
 	}
 }
 
@@ -2133,6 +2165,9 @@ static gboolean cb_func_editor_action(guint key_id)
 			break;
 		case GEANY_KEYS_EDITOR_DELETELINETOEND:
 			sci_send_command(doc->editor->sci, SCI_DELLINERIGHT);
+			break;
+		case GEANY_KEYS_EDITOR_DELETELINETOBEGINNING:
+			sci_send_command(doc->editor->sci, SCI_DELLINELEFT);
 			break;
 		case GEANY_KEYS_EDITOR_TRANSPOSELINE:
 			sci_send_command(doc->editor->sci, SCI_LINETRANSPOSE);
