@@ -1,7 +1,9 @@
 {fileheader}
 
-public static int main(string[] args)
-{
+class {untitled} : GLib.Object {
 
-	return 0;
+    public static int main(string[] args) {
+
+        return 0;
+    }
 }

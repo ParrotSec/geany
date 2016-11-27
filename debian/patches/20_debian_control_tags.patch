@@ -1,10 +1,10 @@
 Author: Damián Viano <des@debian.org>
 Description: Add support for having 'Source:' and 'Package:' as tags in a 
 RFC2822 file as debian/control
-Index: geany/tagmanager/ctags/conf.c
+Index: geany/ctags/parsers/conf.c
 ===================================================================
---- geany.orig/tagmanager/ctags/conf.c	2012-06-18 22:01:18.075873887 +0200
-+++ geany/tagmanager/ctags/conf.c	2012-06-18 22:20:14.228248219 +0200
+--- geany.orig/ctags/parsers/conf.c	2012-06-18 22:01:18.075873887 +0200
++++ geany/ctags/parsers/conf.c	2012-06-18 22:20:14.228248219 +0200
 @@ -14,6 +14,7 @@
  #include "general.h"	/* must always come first */
  
@@ -13,7 +13,7 @@ Index: geany/tagmanager/ctags/conf.c
  
  #include "parse.h"
  #include "read.h"
-@@ -73,6 +74,20 @@
+@@ -73,6 +74,19 @@
  			vStringClear (name);
  			continue;
  		}
@@ -26,7 +26,6 @@ Index: geany/tagmanager/ctags/conf.c
 +			while (isspace ((int) *cp))
 +				++cp;
 +			vStringCopyS (name, (const char*) cp);
-+			vStringTerminate (name);
 +			makeSimpleTag (name, ConfKinds, K_SECTION);
 +			vStringClear (name);
 +			continue;

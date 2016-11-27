@@ -1,6 +1,7 @@
-geany (1.29-1) testing; urgency=medium
+geany (1.29-1parrot0) testing; urgency=medium
 
   * New upstream version 1.29
+  * Fix patches
 
  -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Sun, 27 Nov 2016 01:32:30 +0100
 
