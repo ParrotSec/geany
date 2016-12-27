@@ -1,7 +1,9 @@
 Source: geany
 Section: devel
 Priority: optional
-Maintainer: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+Maintainer: Geany Packaging Team <pkg-geany-team@lists.alioth.debian.org>
+Uploaders: Chow Loong Jin <hyperair@debian.org>,
+ Evgeni Golov <evgeni@debian.org>
 Homepage: http://www.geany.org
 Vcs-Git: https://anonscm.debian.org/git/pkg-geany/packages/geany.git
 Vcs-Browser: https://anonscm.debian.org/git/pkg-geany/packages/geany.git
@@ -36,6 +38,7 @@ Depends: ${misc:Depends}
 Replaces: geany (<< 0.21-1~)
 Breaks: geany (<< 0.21-1~)
 Architecture: all
+Multi-Arch: foreign
 Description: fast and lightweight IDE -- common files
  Geany is a small and lightweight integrated development environment.
  It was developed to provide a small and fast IDE, which has only a

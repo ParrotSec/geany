@@ -79,7 +79,7 @@
 #elif defined(__APPLE__)
 #define GEANY_DEFAULT_TOOLS_TERMINAL	"open -a terminal %c"
 #else
-#define GEANY_DEFAULT_TOOLS_TERMINAL	"x-terminal-emulator -e \"/bin/sh %c\""
+#define GEANY_DEFAULT_TOOLS_TERMINAL	"xterm -e \"/bin/sh %c\""
 #endif
 #ifdef __APPLE__
 #define GEANY_DEFAULT_TOOLS_BROWSER		"open -a safari"
@@ -87,7 +87,7 @@
 #define GEANY_DEFAULT_FONT_MSG_WINDOW	"Menlo Medium 12"
 #define GEANY_DEFAULT_FONT_EDITOR		"Menlo Medium 12"
 #else
-#define GEANY_DEFAULT_TOOLS_BROWSER		"sensible-browser"
+#define GEANY_DEFAULT_TOOLS_BROWSER		"firefox"
 #define GEANY_DEFAULT_FONT_SYMBOL_LIST	"Sans 9"
 #define GEANY_DEFAULT_FONT_MSG_WINDOW	"Monospace 9"
 #define GEANY_DEFAULT_FONT_EDITOR		"Monospace 10"

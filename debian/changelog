@@ -1,3 +1,15 @@
+geany (1.29-1parrot2) testing; urgency=medium
+
+  * Fix missing parrot themes
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 27 Dec 2016 17:26:42 +0100
+
+geany (1.29-1parrot1) testing; urgency=medium
+
+  * Rebuild to fix minor bugs
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 27 Dec 2016 00:36:13 +0100
+
 geany (1.29-1parrot0) testing; urgency=medium
 
   * New upstream version 1.29

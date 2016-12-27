@@ -1,39 +1,7 @@
 
 colorschemes = \
-	colorschemes/tinge.conf \
-	colorschemes/spyder-dark.conf \
-	colorschemes/00frozenbox.conf \
-	colorschemes/solarized-light.conf \
-	colorschemes/mc.conf \
-	colorschemes/vibrant-ink.conf \
-	colorschemes/fluffy.conf \
-	colorschemes/himbeere.conf \
-	colorschemes/inkpot.conf \
-	colorschemes/alt.conf \
-	colorschemes/ubuntu.conf \
-	colorschemes/retro.conf \
-	colorschemes/darcula.conf \
-	colorschemes/pygments.conf \
-	colorschemes/notepad-plus-plus.conf \
-	colorschemes/dark.conf \
-	colorschemes/slushpoppies.conf \
-	colorschemes/solarized-dark.conf \
-	colorschemes/metallic-bottle.conf \
-	colorschemes/railcasts2.conf \
-	colorschemes/monokai.conf \
-	colorschemes/tango-dark.conf \
-	colorschemes/sleepy-pastel.conf \
-	colorschemes/black.conf \
-	colorschemes/oblivion2.conf \
-	colorschemes/kugel.conf \
-	colorschemes/tango-light.conf \
-	colorschemes/bespin.conf \
-	colorschemes/github.conf \
-	colorschemes/zenburn.conf \
-	colorschemes/dark-fruit-salad.conf \
-	colorschemes/steampunk.conf \
-	colorschemes/gedit.conf \
-	
+	colorschemes/alt.conf
+
 filetypes = \
 	filedefs/filetypes.abaqus \
 	filedefs/filetypes.abc \
@@ -112,29 +80,19 @@ tagfiles = \
 	tags/entities.html.tags
 
 template_files = \
-	templates/files/program.pas \
-	templates/files/perlModule.pm \
-	templates/files/file_html5.html \
-	templates/files/style.css \
 	templates/files/file.html \
-	templates/files/falcon.fal \
-	templates/files/main.java \
-	templates/files/file.tex \
+	templates/files/file_html5.html \
 	templates/files/file.php \
-	templates/files/ruby.rb \
-	templates/files/python.py \
-	templates/files/bash.sh \
-	templates/files/perl.pl \
-	templates/files/main.cpp \
-	templates/files/main.cxx \
-	templates/files/main.vala \
-	templates/files/main.c \
 	templates/files/file.rb \
-	templates/files/main.py \
-	templates/files/main.rs \
-	templates/files/pascal.pas \
+	templates/files/file.tex \
+	templates/files/main.c \
+	templates/files/main.cxx \
 	templates/files/main.d \
-	templates/files/module.erl
+	templates/files/main.java \
+	templates/files/main.py \
+	templates/files/main.vala \
+	templates/files/module.erl \
+	templates/files/program.pas
 
 templates = \
 	templates/bsd \
