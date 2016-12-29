@@ -1,3 +1,9 @@
+geany (1.29-1parrot3) UNRELEASED; urgency=medium
+
+  * Add parrot templates to makefile
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 29 Dec 2016 22:50:44 +0100
+
 geany (1.29-1parrot2) testing; urgency=medium
 
   * Fix missing parrot themes
