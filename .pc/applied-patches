@@ -1,0 +1,8 @@
+20_change_gpl_location.patch
+20_add_debian_specific_filetypes.patch
+20_debian_control_tags.patch
+20_use_sensible_browser.patch
+20_load_plugins_from_all_paths.patch
+20_use_x_terminal_emulator.patch
+99_parrot-patches.patch
+99_themes-makefile.patch

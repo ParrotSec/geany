@@ -79,7 +79,7 @@
 #elif defined(__APPLE__)
 #define GEANY_DEFAULT_TOOLS_TERMINAL	"open -a terminal %c"
 #else
-#define GEANY_DEFAULT_TOOLS_TERMINAL	"x-terminal-emulator -e \"/bin/sh %c\""
+#define GEANY_DEFAULT_TOOLS_TERMINAL	"xterm -e \"/bin/sh %c\""
 #endif
 #ifdef __APPLE__
 #define GEANY_DEFAULT_TOOLS_BROWSER		"open -a safari"
