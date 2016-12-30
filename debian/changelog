@@ -1,4 +1,10 @@
-geany (1.29-1parrot3) UNRELEASED; urgency=medium
+geany (1.29-1parrot4) testing; urgency=medium
+
+  * Add parrot templates to Makefile.am
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 30 Dec 2016 12:24:29 +0100
+
+geany (1.29-1parrot3.1) testing; urgency=medium
 
   * Add parrot templates to makefile
 

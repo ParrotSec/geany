@@ -1218,7 +1218,6 @@ static void load_all_plugins(void)
 
 	/* finally load plugins from $prefix/lib/geany */
 	load_plugins_from_path(plugin_path_system);
-	load_plugins_from_path("/usr/lib/geany");
 
 	/* It is important to sort any plugins that are proxied after their proxy because
 	 * pm_populate() needs the proxy to be loaded and active (if selected by user) in order
