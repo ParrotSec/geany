@@ -1,6 +1,38 @@
 
 colorschemes = \
-	colorschemes/alt.conf
+	colorschemes/00frozenbox.conf \
+	colorschemes/alt.conf \
+	colorschemes/bespin.conf \
+	colorschemes/black.conf \
+	colorschemes/darcula.conf \
+	colorschemes/dark-fruit-salad.conf \
+	colorschemes/dark.conf \
+	colorschemes/fluffy.conf \
+	colorschemes/gedit.conf \
+	colorschemes/github.conf \
+	colorschemes/himbeere.conf \
+	colorschemes/inkpot.conf \
+	colorschemes/kugel.conf \
+	colorschemes/mc.conf \
+	colorschemes/metallic-bottle.conf \
+	colorschemes/monokai.conf \
+	colorschemes/notepad-plus-plus.conf \
+	colorschemes/oblivion2.conf \
+	colorschemes/pygments.conf \
+	colorschemes/railcasts2.conf \
+	colorschemes/retro.conf \
+	colorschemes/sleepy-pastel.conf \
+	colorschemes/slushpoppies.conf \
+	colorschemes/solarized-dark.conf \
+	colorschemes/solarized-light.conf \
+	colorschemes/spyder-dark.conf \
+	colorschemes/steampunk.conf \
+	colorschemes/tango-dark.conf \
+	colorschemes/tango-light.conf \
+	colorschemes/tinge.conf \
+	colorschemes/ubuntu.conf \
+	colorschemes/vibrant-ink.conf \
+	colorschemes/zenburn.conf
 
 filetypes = \
 	filedefs/filetypes.abaqus \
@@ -80,19 +112,29 @@ tagfiles = \
 	tags/entities.html.tags
 
 template_files = \
-	templates/files/file.html \
-	templates/files/file_html5.html \
-	templates/files/file.php \
-	templates/files/file.rb \
-	templates/files/file.tex \
 	templates/files/main.c \
-	templates/files/main.cxx \
-	templates/files/main.d \
-	templates/files/main.java \
-	templates/files/main.py \
-	templates/files/main.vala \
 	templates/files/module.erl \
-	templates/files/program.pas
+	templates/files/main.cxx \
+	templates/files/file_html5.html \
+	templates/files/file.rb \
+	templates/files/program.pas \
+	templates/files/main.java \
+	templates/files/main.d \
+	templates/files/main.py \
+	templates/files/file.tex \
+	templates/files/file.php \
+	templates/files/file.html \
+	templates/files/bash.sh \
+	templates/files/falcon.fal \
+	templates/files/main.cpp \
+	templates/files/main.rs \
+	templates/files/main.vala \
+	templates/files/pascal.pas \
+	templates/files/perl.pl \
+	templates/files/perlModule.pm \
+	templates/files/python.py \
+	templates/files/ruby.rb \
+	templates/files/style.css
 
 templates = \
 	templates/bsd \
