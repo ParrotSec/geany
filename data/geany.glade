@@ -4534,7 +4534,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="tooltip_text" translatable="yes">Removes trailing spaces and tabs and the end of lines</property>
+                                <property name="tooltip_text" translatable="yes">Removes trailing spaces and tabs at the end of lines</property>
                                 <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                               </object>
@@ -6562,7 +6562,8 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">_Edit</property>
                     <property name="use_underline">True</property>
-                    <signal name="activate" handler="on_edit1_activate" swapped="no"/>
+                    <signal name="select" handler="on_edit1_select" swapped="no"/>
+                    <signal name="deselect" handler="on_edit1_deselect" swapped="no"/>
                     <child type="submenu">
                       <object class="GtkMenu" id="edit1_menu">
                         <property name="can_focus">False</property>
