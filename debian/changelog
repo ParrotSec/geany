@@ -1,3 +1,9 @@
+geany (1.31-1parrot0) testing; urgency=medium
+
+  * Import new upstream release.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 03 Aug 2017 03:43:50 +0200
+
 geany (1.29-1parrot4) testing; urgency=medium
 
   * Add parrot templates to Makefile.am
