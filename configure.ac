@@ -1,8 +1,8 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.60])
-AC_INIT([Geany], [1.29],
-		[https://sourceforge.net/tracker/?group_id=153444&atid=787791])
+AC_INIT([Geany], [1.31],
+		[https://github.com/geany/geany/issues])
 AC_CONFIG_SRCDIR([src/geany.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
