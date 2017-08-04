@@ -14,6 +14,7 @@
 #include "general.h"	/* must always come first */
 
 #include <ctype.h>
+#include <string.h>
 
 #include "parse.h"
 #include "read.h"
@@ -69,6 +70,19 @@ static void findConfTags (void)
 			makeSimpleTag (name, ConfKinds, K_SECTION);
 			/* remember section name */
 			vStringCopy (scope, name);
+			vStringClear (name);
+			continue;
+		}
+
+		/* look for a stanza */
+		if (*cp != '\0' && (strncmp((const char*) cp, "Source:", 7) == 0 ||
+			strncmp((const char*) cp, "Package:", 8) == 0))
+		{
+			cp = (const unsigned char*) strchr((const char*) cp, ':') + 1;
+			while (isspace ((int) *cp))
+				++cp;
+			vStringCopyS (name, (const char*) cp);
+			makeSimpleTag (name, ConfKinds, K_SECTION);
 			vStringClear (name);
 			continue;
 		}

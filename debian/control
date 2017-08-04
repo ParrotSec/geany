@@ -12,7 +12,7 @@ Standards-Version: 3.9.8
 
 Package: geany
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, geany-common (=> ${source:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, geany-common (>= ${source:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Provides: ${geany:Provides}
 Breaks: geany-plugins-common (<< 0.21)
