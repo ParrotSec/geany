@@ -3,11 +3,11 @@ Description: Use x-terminal-emulator instead of xterm to be more desktop
 Author: Levu <levu@phicode.de>
 Bug-Ubuntu: https://bugs.launchpad.net/bugs/282972
 Bug-Debian: http://bugs.debian.org/670510
-Index: geany-1.29/src/keyfile.c
+Index: geany/src/keyfile.c
 ===================================================================
---- geany-1.29.orig/src/keyfile.c
-+++ geany-1.29/src/keyfile.c
-@@ -79,7 +79,7 @@
+--- geany.orig/src/keyfile.c	2013-03-10 16:03:06.749907915 +0100
++++ geany/src/keyfile.c	2013-03-10 16:03:06.745907918 +0100
+@@ -77,7 +77,7 @@
  #elif defined(__APPLE__)
  #define GEANY_DEFAULT_TOOLS_TERMINAL	"open -a terminal %c"
  #else

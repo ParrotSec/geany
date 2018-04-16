@@ -10,7 +10,7 @@ override_dh_autoreconf:
 	NOCONFIGURE=1 dh_autoreconf ./autogen.sh
 
 override_dh_auto_configure:
-	dh_auto_configure -- --enable-vte --enable-the-force
+	dh_auto_configure -- --enable-vte --enable-the-force --enable-gtk3
 	sed -i -r 's,^sys_lib_dlsearch_path_spec="(.*)$$,sys_lib_dlsearch_path_spec="/usr/lib /lib \1,' $(CURDIR)/libtool
 
 override_dh_auto_install:
@@ -29,9 +29,13 @@ override_dh_auto_install:
 override_dh_install:
 	dh_install --list-missing
 
-override_dh_gencontrol:
-	echo -n "geany:Provides=geany-abi-`grep 'define GEANY_ABI_VERSION' src/plugindata.h |awk '{print $$3}' |sed 's#[^0-9]##g'`," \
-		>> debian/geany.substvars
-	echo " geany-api-`grep 'define GEANY_API_VERSION' src/plugindata.h |awk '{print $$3}' |sed 's#[^0-9]##g'`" \
-		>> debian/geany.substvars
-	dh_gencontrol
+debian/dumpabiver: debian/dumpabiver.c
+	$(CC) -o $@ $< \
+		-Isrc -Isrc/tagmanager -Iscintilla/include \
+		$(shell pkg-config --cflags --libs glib-2.0 gtk+-3.0 gthread-2.0) \
+		-DGTK -DGEANY_PRIVATE
+
+override_dh_gencontrol: debian/dumpabiver
+	eval $(shell $<) && \
+	dh_gencontrol -- \
+		"-Vgeany:Provides=$${GEANY_ABI}, $${GEANY_API}"

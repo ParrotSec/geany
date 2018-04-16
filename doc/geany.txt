@@ -1,4 +1,4 @@
-.. |(version)| replace:: 1.31
+.. |(version)| replace:: 1.33
 .. -*- reStructuredText -*-
 
 =======
@@ -14,10 +14,10 @@
           Frank Lanitz,
           Colomban Wendling,
           Matthew Brush
-:Date: 2017-07-16
+:Date: 2018-02-25
 :Version: |(version)|
 
-Copyright © 2005-2017
+Copyright © 2005-2018
 
 This document is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation; either version 2
@@ -492,6 +492,27 @@ An example of a simple ``.gtkrc-2.0``::
         font_name="Sans 10"
     }
     widget "GeanyPrefsDialog" style "geanyStyle"
+
+
+Customizing Geany's appearance using GTK+ 3 CSS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To override GTK+ CSS styles, you can use traditional mechanisms or you
+can create a file named ``geany.css`` in the user configuration directory
+(usually ``~/.config/geany``) which will be loaded after other CSS styles
+are applied to allow overriding the default styles.
+
+Geany offers a number of CSS IDs which can be used to taylor its
+appearence. Among the more interesting include:
+
+* ``geany-compiler-context`` - the style used for build command output surrounding errors
+* ``geany-compiler-error`` - the style used for build command errors
+* ``geany-compiler-message`` - the style other output encountered while running build command
+* ``geany-document-status-changed`` - the style for document tab labels when the document is changed
+* ``geany-document-status-disk-changed`` - the style for document tab labels when the file on disk has changed
+* ``geany-document-status-readyonly``` - the style for document tab labels when the document is read-only
+* ``geany-search-entry-no-match`` - the style of find/replace diaog entries when no match is found
+* ``geany-terminal-dirty`` - the style for the message window Terminal tab label when the terminal output has changed.
 
 
 Documents
@@ -2527,6 +2548,9 @@ show_editor_scrollbars            Whether to display scrollbars. If set to     t
 indent_hard_tab_width             The size of a tab character. Don't change    8           immediately
                                   it unless you really need to; use the
                                   indentation settings instead.
+editor_ime_interaction            Input method editor (IME)'s candidate        0           to new
+                                  window behaviour. May be 0 (windowed) or                 documents
+                                  1 (inline)
 **Interface related**
 show_symbol_list_expanders        Whether to show or hide the small            true        to new
                                   expander icons on the symbol list                        documents
@@ -2598,6 +2622,11 @@ gio_unsafe_save_backup            Make a backup when using GIO unsafe file     f
 keep_edit_history_on_reload       Whether to maintain the edit history when    true        immediately
                                   reloading a file, and allow the operation
                                   to be reverted.
+reload_clean_doc_on_file_change   Whether to automatically reload documents    false       immediately
+                                  that have no changes but which have changed
+                                  on disk.
+                                  If unsaved changes exist then the user is
+                                  prompted to reload manually.
 **Filetype related**
 extract_filetype_regex            Regex to extract filetype name from file     See below.  immediately
                                   via capture group one.
