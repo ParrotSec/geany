@@ -3,7 +3,7 @@
 # It's stronly recommended to use packages of your own distributor
 
 Name:          geany
-Version:       1.31
+Version:       1.33
 Release:       1
 Summary:       A fast and lightweight IDE using GTK+
 
