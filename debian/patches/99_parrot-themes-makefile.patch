@@ -1,0 +1,191 @@
+Description: modify makefile to install parrot themes and templates
+ geany (1.29-1parrot4) testing; urgency=medium
+ .
+   * Add parrot templates to Makefile.am
+Author: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+Last-Update: 2016-12-30
+
+--- a/data/Makefile.am
++++ b/data/Makefile.am
+@@ -1,6 +1,38 @@
+ 
+ colorschemes = \
+-	colorschemes/alt.conf
++	colorschemes/00frozenbox.conf \
++	colorschemes/alt.conf \
++	colorschemes/bespin.conf \
++	colorschemes/black.conf \
++	colorschemes/darcula.conf \
++	colorschemes/dark-fruit-salad.conf \
++	colorschemes/dark.conf \
++	colorschemes/fluffy.conf \
++	colorschemes/gedit.conf \
++	colorschemes/github.conf \
++	colorschemes/himbeere.conf \
++	colorschemes/inkpot.conf \
++	colorschemes/kugel.conf \
++	colorschemes/mc.conf \
++	colorschemes/metallic-bottle.conf \
++	colorschemes/monokai.conf \
++	colorschemes/notepad-plus-plus.conf \
++	colorschemes/oblivion2.conf \
++	colorschemes/pygments.conf \
++	colorschemes/railcasts2.conf \
++	colorschemes/retro.conf \
++	colorschemes/sleepy-pastel.conf \
++	colorschemes/slushpoppies.conf \
++	colorschemes/solarized-dark.conf \
++	colorschemes/solarized-light.conf \
++	colorschemes/spyder-dark.conf \
++	colorschemes/steampunk.conf \
++	colorschemes/tango-dark.conf \
++	colorschemes/tango-light.conf \
++	colorschemes/tinge.conf \
++	colorschemes/ubuntu.conf \
++	colorschemes/vibrant-ink.conf \
++	colorschemes/zenburn.conf
+ 
+ filetypes = \
+ 	filedefs/filetypes.abaqus \
+@@ -80,19 +112,29 @@ tagfiles = \
+ 	tags/entities.html.tags
+ 
+ template_files = \
+-	templates/files/file.html \
+-	templates/files/file_html5.html \
+-	templates/files/file.php \
+-	templates/files/file.rb \
+-	templates/files/file.tex \
+ 	templates/files/main.c \
++	templates/files/module.erl \
+ 	templates/files/main.cxx \
+-	templates/files/main.d \
++	templates/files/file_html5.html \
++	templates/files/file.rb \
++	templates/files/program.pas \
+ 	templates/files/main.java \
++	templates/files/main.d \
+ 	templates/files/main.py \
++	templates/files/file.tex \
++	templates/files/file.php \
++	templates/files/file.html \
++	templates/files/bash.sh \
++	templates/files/falcon.fal \
++	templates/files/main.cpp \
++	templates/files/main.rs \
+ 	templates/files/main.vala \
+-	templates/files/module.erl \
+-	templates/files/program.pas
++	templates/files/pascal.pas \
++	templates/files/perl.pl \
++	templates/files/perlModule.pm \
++	templates/files/python.py \
++	templates/files/ruby.rb \
++	templates/files/style.css
+ 
+ templates = \
+ 	templates/bsd \
+
+--- a/data/Makefile.in
++++ b/data/Makefile.in
+@@ -200,7 +200,7 @@ am__nobase_strip = \
+   for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
+ am__nobase_list = $(am__nobase_strip_setup); \
+   for p in $$list; do echo "$$p $$p"; done | \
+-  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
++  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ 	; s,\( .*\)/[^/]*$$,\1,' | \
+   $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
+     if (++n[$$2] == $(am__install_max)) \
+       { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
+@@ -400,7 +400,40 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ colorschemes = \
+-	colorschemes/alt.conf
++	colorschemes/00frozenbox.conf \
++	colorschemes/alt.conf \
++	colorschemes/bespin.conf \
++	colorschemes/black.conf \
++	colorschemes/darcula.conf \
++	colorschemes/dark-fruit-salad.conf \
++	colorschemes/dark.conf \
++	colorschemes/fluffy.conf \
++	colorschemes/gedit.conf \
++	colorschemes/github.conf \
++	colorschemes/himbeere.conf \
++	colorschemes/inkpot.conf \
++	colorschemes/kugel.conf \
++	colorschemes/mc.conf \
++	colorschemes/metallic-bottle.conf \
++	colorschemes/monokai.conf \
++	colorschemes/notepad-plus-plus.conf \
++	colorschemes/oblivion2.conf \
++	colorschemes/pygments.conf \
++	colorschemes/railcasts2.conf \
++	colorschemes/retro.conf \
++	colorschemes/sleepy-pastel.conf \
++	colorschemes/slushpoppies.conf \
++	colorschemes/solarized-dark.conf \
++	colorschemes/solarized-light.conf \
++	colorschemes/spyder-dark.conf \
++	colorschemes/steampunk.conf \
++	colorschemes/tango-dark.conf \
++	colorschemes/tango-light.conf \
++	colorschemes/tinge.conf \
++	colorschemes/ubuntu.conf \
++	colorschemes/vibrant-ink.conf \
++	colorschemes/zenburn.conf
++
+ 
+ filetypes = \
+ 	filedefs/filetypes.abaqus \
+@@ -480,19 +513,30 @@ tagfiles = \
+ 	tags/entities.html.tags
+ 
+ template_files = \
+-	templates/files/file.html \
+-	templates/files/file_html5.html \
+-	templates/files/file.php \
+-	templates/files/file.rb \
+-	templates/files/file.tex \
+ 	templates/files/main.c \
++	templates/files/module.erl \
+ 	templates/files/main.cxx \
+-	templates/files/main.d \
++	templates/files/file_html5.html \
++	templates/files/file.rb \
++	templates/files/program.pas \
+ 	templates/files/main.java \
++	templates/files/main.d \
+ 	templates/files/main.py \
++	templates/files/file.tex \
++	templates/files/file.php \
++	templates/files/file.html \
++	templates/files/bash.sh \
++	templates/files/falcon.fal \
++	templates/files/main.cpp \
++	templates/files/main.rs \
+ 	templates/files/main.vala \
+-	templates/files/module.erl \
+-	templates/files/program.pas
++	templates/files/pascal.pas \
++	templates/files/perl.pl \
++	templates/files/perlModule.pm \
++	templates/files/python.py \
++	templates/files/ruby.rb \
++	templates/files/style.css
++
+ 
+ templates = \
+ 	templates/bsd \
+@@ -525,8 +569,8 @@ Makefile: $(srcdir)/Makefile.in $(top_bu
+ 	  *config.status*) \
+ 	    cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh;; \
+ 	  *) \
+-	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
+-	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
++	    echo ' cd $(top_builddir) && $(SHELL) 	config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
++	    cd $(top_builddir) && $(SHELL) 	config.status $(subdir)/$@ $(am__depfiles_maybe);; \
+ 	esac;
+ 
+ $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
