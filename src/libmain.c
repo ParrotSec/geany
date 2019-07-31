@@ -1,8 +1,7 @@
 /*
  *      libmain.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -1174,8 +1173,18 @@ gint main_lib(gint argc, gchar **argv)
 
 	ui_set_statusbar(TRUE, _("This is Geany %s."), main_get_version_string());
 	if (config_dir_result != 0)
-		ui_set_statusbar(TRUE, _("Configuration directory could not be created (%s)."),
-			g_strerror(config_dir_result));
+	{
+		const gchar *message = _("Configuration directory could not be created (%s).");
+		ui_set_statusbar(TRUE, message, g_strerror(config_dir_result));
+		g_warning(message, g_strerror(config_dir_result));
+	}
+	if (socket_info.lock_socket == -1)
+	{
+		const gchar *message =
+			_("IPC socket could not be created, see Help->Debug Messages for details.");
+		ui_set_statusbar(TRUE, "%s", message);
+		g_warning("%s", message);
+	}
 
 	/* apply all configuration options */
 	apply_settings();
@@ -1262,16 +1271,20 @@ static void queue_free(GQueue *queue)
 }
 
 
-static void do_main_quit(void)
+static gboolean do_main_quit(void)
 {
-	geany_debug("Quitting...");
-
 	configuration_save();
 
 	if (app->project != NULL)
-		project_close(FALSE);   /* save project session files */
+	{
+		if (!project_close(FALSE))   /* save project session files */
+			return FALSE;
+	}
 
-	document_close_all();
+	if (!document_close_all())
+		return FALSE;
+
+	geany_debug("Quitting...");
 
 	main_status.quitting = TRUE;
 
@@ -1364,6 +1377,8 @@ static void do_main_quit(void)
 	ui_finalize_builder();
 
 	gtk_main_quit();
+
+	return TRUE;
 }
 
 
@@ -1389,19 +1404,16 @@ gboolean main_quit(void)
 
 	if (! check_no_unsaved())
 	{
-		if (document_account_for_unsaved())
-		{
-			do_main_quit();
+		if (do_main_quit())
 			return TRUE;
-		}
 	}
 	else
 	if (! prefs.confirm_exit ||
 		dialogs_show_question_full(NULL, GTK_STOCK_QUIT, GTK_STOCK_CANCEL, NULL,
 			_("Do you really want to quit?")))
 	{
-		do_main_quit();
-		return TRUE;
+		if (do_main_quit())
+			return TRUE;
 	}
 
 	main_status.quitting = FALSE;

@@ -12,6 +12,13 @@ test_sources = \
 	3470609.js						\
 	3526726.tex						\
 	68hc11.asm						\
+	actionscript/as-first-token.as	\
+	actionscript/classes.as			\
+	actionscript/const2.as			\
+	actionscript/const.as			\
+	actionscript/method-attributes.as	\
+	actionscript/packages.as		\
+	actionscript/sampler.as			\
 	angle_bracket.cpp				\
 	anonymous_functions.php			\
 	arraylist.js					\
@@ -114,6 +121,11 @@ test_sources = \
 	case_sensitivity.php			\
 	char-selector.f90				\
 	classes.php						\
+	cobol/helloworld.cbl			\
+	cobol/helloworld2.cbl			\
+	cobol/levels.cbl				\
+	cobol/quoted-program-id.cbl		\
+	cobol/simple.cbl				\
 	common.f						\
 	complex-return.js				\
 	continuation.f90				\
@@ -154,6 +166,7 @@ test_sources = \
 	fortran_associate.f90			\
 	fortran_line_continuation.f90	\
 	func_typedef.h					\
+	geany.nsi						\
 	general.cs						\
 	hex2dec.sql						\
 	implied_program.f				\
@@ -268,22 +281,32 @@ test_sources = \
 	semicolon.f90					\
 	shebang.js						\
 	signature.cpp					\
+	simple.abc						\
+	simple.asciidoc					\
 	simple.bas						\
-	simple.cbl						\
+	simple.conf						\
 	simple.d						\
+	simple.diff						\
+	simple.docbook					\
+	simple.hs						\
+	simple.hx						\
 	simple.html						\
+	simple.inp						\
 	simple.js						\
 	simple.json						\
 	simple.ksh						\
 	simple.lua						\
 	simple.mak						\
+	simple.md						\
 	simple.php						\
 	simple.pl						\
 	simple.ps1						\
 	simple.py						\
 	simple.rb						\
+	simple.rst						\
 	simple.sh						\
 	simple.tcl						\
+	simple.vala						\
 	simple.zep						\
 	size_t_wchar_t_alias.d			\
 	size_t_wchar_t_typedef.c		\
@@ -319,3 +342,13 @@ TAGS_LOG_COMPILER = $(srcdir)/runner.sh
 
 TESTS = $(test_results)
 EXTRA_DIST = $(test_sources) $(test_results)
+
+# check processing order of files on the command line
+check_processing_order_sources = \
+	process_order.c.tags process_order_1.h process_order_2.h
+EXTRA_DIST += $(check_processing_order_sources)
+.PHONY: check-processing-order
+check-processing-order: $(check_processing_order_sources)
+	srcdir="$(srcdir)" top_builddir="$(top_builddir)" \
+	$(srcdir)/runner.sh --result $(check_processing_order_sources:%=$(srcdir)/%)
+check-local: check-processing-order

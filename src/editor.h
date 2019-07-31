@@ -1,8 +1,7 @@
 /*
  *      editor.h - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -258,7 +257,7 @@ void editor_insert_alternative_whitespace(GeanyEditor *editor);
 
 void editor_indent(GeanyEditor *editor, gboolean increase);
 
-void editor_smart_line_indentation(GeanyEditor *editor, gint pos);
+void editor_smart_line_indentation(GeanyEditor *editor);
 
 void editor_indentation_by_one_space(GeanyEditor *editor, gint pos, gboolean decrease);
 

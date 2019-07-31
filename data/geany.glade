@@ -1032,6 +1032,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Startup path:</property>
+                                    <property name="mnemonic_widget">startup_path_entry</property>
                                   </object>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -1081,6 +1082,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Project files:</property>
+                                    <property name="mnemonic_widget">project_file_path_entry</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -1136,6 +1138,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Extra plugin path:</property>
+                                    <property name="mnemonic_widget">extra_plugin_path_entry</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -1863,6 +1866,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Symbol list:</property>
+                                    <property name="mnemonic_widget">tagbar_font</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -1877,6 +1881,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Message window:</property>
+                                    <property name="mnemonic_widget">msgwin_font</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -1891,6 +1896,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Editor:</property>
+                                    <property name="mnemonic_widget">editor_font</property>
                                   </object>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -2244,6 +2250,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Message window:</property>
+                                    <property name="mnemonic_widget">combo_tab_msgwin</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -2279,6 +2286,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Sidebar:</property>
+                                    <property name="mnemonic_widget">combo_tab_sidebar</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -2314,6 +2322,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Editor:</property>
+                                    <property name="mnemonic_widget">combo_tab_editor</property>
                                   </object>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -2922,6 +2931,7 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">Line breaking column:</property>
+                                        <property name="mnemonic_widget">spin_line_break</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2964,6 +2974,7 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">Comment toggle marker:</property>
+                                        <property name="mnemonic_widget">entry_toggle_mark</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3100,7 +3111,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Width:</property>
+                                        <property name="label" translatable="yes">_Width:</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">spin_indent_width</property>
                                       </object>
                                       <packing>
                                         <property name="x_options">GTK_FILL</property>
@@ -3133,7 +3146,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Auto-indent mode:</property>
+                                        <property name="label" translatable="yes">Auto-indent _mode:</property>
+                                        <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">combo_auto_indent_mode</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">6</property>
@@ -3283,7 +3298,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="check_tab_key_indents">
-                                    <property name="label" translatable="yes">Tab key indents</property>
+                                    <property name="label" translatable="yes">Tab _key indents</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -3461,6 +3476,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">Max. symbol name suggestions:</property>
+                                        <property name="mnemonic_widget">spin_autocompletion_max_entries</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">2</property>
@@ -3475,6 +3491,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">Completion list height:</property>
+                                        <property name="mnemonic_widget">spin_symbollistheight</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">1</property>
@@ -3489,6 +3506,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">Characters to type for autocompletion:</property>
+                                        <property name="mnemonic_widget">spin_symbol_complete_chars</property>
                                       </object>
                                       <packing>
                                         <property name="x_options">GTK_FILL</property>
@@ -3562,6 +3580,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">Symbol list update frequency:</property>
+                                        <property name="mnemonic_widget">spin_symbol_update_freq</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">3</property>
@@ -3969,6 +3988,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Column:</property>
+                                    <property name="mnemonic_widget">spin_long_line</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -3983,6 +4003,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Color:</property>
+                                    <property name="mnemonic_widget">long_line_color</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">3</property>
@@ -3997,6 +4018,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Type:</property>
+                                    <property name="mnemonic_widget">hbox5</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -4317,6 +4339,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes">Default end of line characters:</property>
+                                        <property name="mnemonic_widget">combo_eol</property>
                                       </object>
                                       <packing>
                                         <property name="x_options">GTK_FILL</property>
@@ -4382,6 +4405,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Default encoding (new files):</property>
+                                    <property name="mnemonic_widget">combo_new_encoding</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -4443,6 +4467,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Default encoding (existing non-Unicode files):</property>
+                                    <property name="mnemonic_widget">combo_open_encoding</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -4625,6 +4650,7 @@
                                     <property name="xalign">0</property>
                                     <property name="ypad">7</property>
                                     <property name="label" translatable="yes">Recent files list length:</property>
+                                    <property name="mnemonic_widget">spin_mru</property>
                                   </object>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -4658,6 +4684,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Disk check timeout:</property>
+                                    <property name="mnemonic_widget">spin_disk_check</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -4781,6 +4808,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Terminal:</property>
+                                    <property name="mnemonic_widget">entry_com_term</property>
                                   </object>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -4793,6 +4821,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Browser:</property>
+                                    <property name="mnemonic_widget">entry_browser</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -4883,6 +4912,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Grep:</property>
+                                    <property name="mnemonic_widget">entry_grep</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -4979,6 +5009,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">Context action:</property>
+                                <property name="mnemonic_widget">entry_contextaction</property>
                               </object>
                               <packing>
                                 <property name="x_options">GTK_FILL</property>
@@ -5105,7 +5136,7 @@
                                   <object class="GtkEntry" id="entry_template_mail">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="tooltip_text" translatable="yes">email address of the developer</property>
+                                    <property name="tooltip_text" translatable="yes">Email address of the developer</property>
                                     <property name="primary_icon_activatable">False</property>
                                     <property name="secondary_icon_activatable">False</property>
                                     <property name="primary_icon_sensitive">True</property>
@@ -5143,6 +5174,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Initial version:</property>
+                                    <property name="mnemonic_widget">entry_template_version</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">4</property>
@@ -5193,6 +5225,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Developer:</property>
+                                    <property name="mnemonic_widget">entry_template_developer</property>
                                   </object>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -5205,6 +5238,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Company:</property>
+                                    <property name="mnemonic_widget">entry_template_company</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">3</property>
@@ -5219,6 +5253,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Mail address:</property>
+                                    <property name="mnemonic_widget">entry_template_mail</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -5233,6 +5268,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Initials:</property>
+                                    <property name="mnemonic_widget">entry_template_initial</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -5263,6 +5299,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Year:</property>
+                                    <property name="mnemonic_widget">entry_template_year</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">5</property>
@@ -5277,6 +5314,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Date:</property>
+                                    <property name="mnemonic_widget">entry_template_date</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">6</property>
@@ -5291,6 +5329,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Date &amp; time:</property>
+                                    <property name="mnemonic_widget">entry_template_datetime</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">7</property>
@@ -5533,6 +5572,7 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="label" translatable="yes">Command:</property>
+                                        <property name="mnemonic_widget">entry_print_external_cmd</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -5703,6 +5743,7 @@
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">False</property>
                                                         <property name="label" translatable="yes">Date format:</property>
+                                                        <property name="mnemonic_widget">entry_print_dateformat</property>
                                                       </object>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -5825,6 +5866,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Font:</property>
+                                <property name="mnemonic_widget">font_term</property>
                               </object>
                               <packing>
                                 <property name="x_options">GTK_FILL</property>
@@ -5851,6 +5893,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Foreground color:</property>
+                                <property name="mnemonic_widget">color_fore</property>
                               </object>
                               <packing>
                                 <property name="top_attach">1</property>
@@ -5865,6 +5908,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Background color:</property>
+                                <property name="mnemonic_widget">color_back</property>
                               </object>
                               <packing>
                                 <property name="top_attach">2</property>
@@ -5879,6 +5923,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Scrollback lines:</property>
+                                <property name="mnemonic_widget">spin_scrollback</property>
                               </object>
                               <packing>
                                 <property name="top_attach">3</property>
@@ -5893,6 +5938,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Shell:</property>
+                                <property name="mnemonic_widget">entry_shell</property>
                               </object>
                               <packing>
                                 <property name="top_attach">4</property>
@@ -8512,6 +8558,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Filename:</property>
+                    <property name="mnemonic_widget">label_project_dialog_filename</property>
                   </object>
                   <packing>
                     <property name="x_options">GTK_FILL</property>
@@ -8523,7 +8570,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Name:</property>
+                    <property name="label" translatable="yes">_Name:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">entry_project_dialog_name</property>
                   </object>
                   <packing>
                     <property name="top_attach">1</property>
@@ -8538,7 +8587,9 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="yalign">0</property>
-                    <property name="label" translatable="yes">Description:</property>
+                    <property name="label" translatable="yes">_Description:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">textview_project_dialog_description</property>
                   </object>
                   <packing>
                     <property name="top_attach">2</property>
@@ -8552,7 +8603,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Base path:</property>
+                    <property name="label" translatable="yes">_Base path:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">entry_project_dialog_base_path</property>
                   </object>
                   <packing>
                     <property name="top_attach">3</property>
@@ -8566,7 +8619,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">File patterns:</property>
+                    <property name="label" translatable="yes">File _patterns:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">entry_project_dialog_file_patterns</property>
                   </object>
                   <packing>
                     <property name="top_attach">4</property>
@@ -8761,7 +8816,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Width:</property>
+                    <property name="label" translatable="yes">_Width:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">spin_indent_width_project</property>
                   </object>
                   <packing>
                     <property name="top_attach">1</property>
@@ -8798,7 +8855,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Auto-indent mode:</property>
+                    <property name="label" translatable="yes">Auto-indent _mode:</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">combo_auto_indent_mode_project</property>
                   </object>
                   <packing>
                     <property name="top_attach">7</property>
@@ -9002,6 +9061,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Line breaking column:</property>
+                                    <property name="mnemonic_widget">spin_line_break1</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9138,6 +9198,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Column:</property>
+                                <property name="mnemonic_widget">spin_long_line_project</property>
                               </object>
                               <packing>
                                 <property name="top_attach">3</property>
@@ -9489,6 +9550,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Type:</property>
+                    <property name="mnemonic_widget">file_type_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9513,6 +9575,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Size:</property>
+                    <property name="mnemonic_widget">file_size_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9528,6 +9591,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Location:</property>
+                    <property name="mnemonic_widget">file_location_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9543,6 +9607,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Read-only:</property>
+                    <property name="mnemonic_widget">file_read_only_check</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9558,6 +9623,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Encoding:</property>
+                    <property name="mnemonic_widget">file_encoding_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9573,6 +9639,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Modified:</property>
+                    <property name="mnemonic_widget">file_modified_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9588,6 +9655,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Changed:</property>
+                    <property name="mnemonic_widget">file_changed_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -9603,6 +9671,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">Accessed:</property>
+                    <property name="mnemonic_widget">file_accessed_label</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>

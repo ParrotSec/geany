@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.60])
-AC_INIT([Geany], [1.33],
+AC_INIT([Geany], [1.35],
 		[https://github.com/geany/geany/issues])
 AC_CONFIG_SRCDIR([src/geany.h])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -39,7 +39,12 @@ AC_PROG_LN_S
 # autoscan start
 
 # Checks for header files.
-AC_CHECK_HEADERS([fcntl.h fnmatch.h glob.h stdlib.h sys/time.h])
+AC_CHECK_HEADERS([fcntl.h glob.h stdlib.h sys/time.h errno.h limits.h])
+
+# Checks for dependencies needed by ctags
+AC_CHECK_HEADERS([fnmatch.h direct.h io.h sys/dir.h])
+AC_DEFINE([USE_STDBOOL_H], [1], [whether or not to use <stdbool.h>.])
+AC_DEFINE([CTAGS_LIB], [1], [compile ctags as a library.])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_OFF_T
@@ -47,7 +52,17 @@ AC_TYPE_SIZE_T
 AC_STRUCT_TM
 
 # Checks for library functions.
-AC_CHECK_FUNCS([ftruncate fgetpos fnmatch mkstemp strerror strstr])
+AC_CHECK_FUNCS([fgetpos fnmatch mkstemp strerror strstr])
+
+# Function checks for u-ctags
+AC_CHECK_FUNCS([strcasecmp stricmp], [break])
+AC_CHECK_FUNCS([strncasecmp strnicmp], [break])
+AC_CHECK_FUNCS([truncate ftruncate chsize], [break])
+# non-functions checks for u-ctags.  Not that we really need those as we don't
+# use u-ctags's main, but the corresponding macros have to be defined to
+# something, so simply perform the actual checks.
+AC_CHECK_DECLS([__environ],,,[[#include <unistd.h>]])
+AC_CHECK_DECLS([_NSGetEnviron],,,[[#include <crt_externs.h>]])
 
 # autoscan end
 
@@ -56,19 +71,28 @@ AC_CHECK_FUNCS([ftruncate fgetpos fnmatch mkstemp strerror strstr])
 GEANY_CHECK_REVISION([dnl force debug mode for a VCS working copy
 					  CFLAGS="-g -DGEANY_DEBUG $CFLAGS"])
 
-
+# GTK version check
 AC_ARG_ENABLE([gtk3],
 		[AS_HELP_STRING([--enable-gtk3],
-						[compile with GTK3 support (experimental) [default=no]])],
+						[compile against GTK3 [default=auto]])],
 		[enable_gtk3=$enableval],
-		[enable_gtk3=no])
+		[enable_gtk3=auto])
 
-AS_IF([test "x$enable_gtk3" = xyes],
-	  [gtk_package=gtk+-3.0
-	   gtk_min_version=3.0],
-	  [gtk_package=gtk+-2.0
-	   gtk_min_version=2.24])
-AM_CONDITIONAL([GTK3], [test "x$gtk_package" = "xgtk+-3.0"])
+gtk2_package=gtk+-2.0
+gtk2_min_version=2.24
+gtk3_package=gtk+-3.0
+gtk3_min_version=3.0
+
+PKG_CHECK_EXISTS([$gtk2_package >= $gtk2_min_version], [have_gtk2=yes], [have_gtk2=no])
+PKG_CHECK_EXISTS([$gtk3_package >= $gtk3_min_version], [have_gtk3=yes], [have_gtk3=no])
+AS_IF([test "x$enable_gtk3" = xyes || (test "x$enable_gtk3" != xno &&
+									   test "x$have_gtk3" = xyes &&
+									   test "x$have_gtk2" = xno)],
+	  [gtk_package=$gtk3_package
+	   gtk_min_version=$gtk3_min_version],
+	  [gtk_package=$gtk2_package
+	   gtk_min_version=$gtk2_min_version])
+AM_CONDITIONAL([GTK3], [test "x$gtk_package" = "x$gtk3_package"])
 
 # GTK/GLib/GIO checks
 gtk_modules="$gtk_package >= $gtk_min_version glib-2.0 >= 2.32"
@@ -154,7 +178,6 @@ AC_CONFIG_FILES([
 		data/Makefile
 		doc/Makefile
 		doc/geany.1
-		geany.spec
 		geany.pc
 		geany.nsi
 		doc/Doxyfile

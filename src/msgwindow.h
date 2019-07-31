@@ -1,8 +1,7 @@
 /*
  *      msgwindow.h - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -53,11 +52,14 @@ typedef enum
 
 
 void msgwin_status_add(const gchar *format, ...) G_GNUC_PRINTF (1, 2);
+void msgwin_status_add_string(const gchar *msg);
 
 void msgwin_compiler_add(gint msg_color, const gchar *format, ...) G_GNUC_PRINTF (2, 3);
+void msgwin_compiler_add_string(gint msg_color, const gchar *msg);
 
 void msgwin_msg_add(gint msg_color, gint line, GeanyDocument *doc, const gchar *format, ...)
 			G_GNUC_PRINTF (4, 5);
+void msgwin_msg_add_string(gint msg_color, gint line, GeanyDocument *doc, const char *msg);
 
 void msgwin_clear_tab(gint tabnum);
 
@@ -92,10 +94,6 @@ void msgwin_init(void);
 void msgwin_finalize(void);
 
 void msgwin_show_hide(gboolean show);
-
-void msgwin_msg_add_string(gint msg_color, gint line, GeanyDocument *doc, const gchar *string);
-
-void msgwin_compiler_add_string(gint msg_color, const gchar *msg);
 
 void msgwin_show_hide_tabs(void);
 

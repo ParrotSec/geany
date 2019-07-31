@@ -1,6 +1,6 @@
 /*
 *
-*   Copyright (c) 2014, Colomban Wendling
+*   Copyright (c) 2014 The Geany contributors
 *
 *   This source code is released for free distribution under the terms of the
 *   GNU General Public License.
@@ -118,6 +118,8 @@ void tm_parser_verify_type_mappings(void);
 TMTagType tm_parser_get_tag_type(gchar kind, TMParserType lang);
 
 gchar tm_parser_get_tag_kind(TMTagType type, TMParserType lang);
+
+TMTagType tm_parser_get_subparser_type(TMParserType lang, TMParserType sublang, TMTagType type);
 
 const gchar *tm_parser_context_separator(TMParserType lang);
 

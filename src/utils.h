@@ -1,8 +1,7 @@
 /*
  *      utils.h - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -300,6 +299,8 @@ void utils_free_pointers(gsize arg_count, ...) G_GNUC_NULL_TERMINATED;
 gchar **utils_strv_new(const gchar *first, ...) G_GNUC_NULL_TERMINATED;
 
 gchar **utils_strv_join(gchar **first, gchar **second) G_GNUC_WARN_UNUSED_RESULT;
+
+gchar **utils_strv_shorten_file_list(gchar **file_names, gssize file_names_len);
 
 GSList *utils_get_config_files(const gchar *subdir);
 

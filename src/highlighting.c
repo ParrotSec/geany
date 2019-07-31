@@ -1,9 +1,7 @@
 /*
  *      highlighting.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
- *      Copyright 2011-2012 Colomban Wendling <ban(at)herbesfolles(dot)org>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -786,8 +784,6 @@ static void styleset_common(ScintillaObject *sci, guint ft_id)
 	SSM(sci, SCI_SETSELFORE, style->bold, invert(style->foreground));
 	/* italic (4th argument) is whether to override default background selection */
 	SSM(sci, SCI_SETSELBACK, style->italic, invert(style->background));
-
-	SSM(sci, SCI_SETSTYLEBITS, SSM(sci, SCI_GETSTYLEBITSNEEDED, 0, 0), 0);
 
 	SSM(sci, SCI_SETFOLDMARGINCOLOUR, 1, invert(common_style_set.styling[GCS_MARGIN_FOLDING].background));
 	SSM(sci, SCI_SETFOLDMARGINHICOLOUR, 1, invert(common_style_set.styling[GCS_MARGIN_FOLDING].background));
@@ -1588,6 +1584,10 @@ gboolean highlighting_is_string_style(gint lexer, gint style)
 
 		case SCLEX_VERILOG:
 			return (style == SCE_V_STRING);
+
+		case SCLEX_VHDL:
+			return (style == SCE_VHDL_STRING ||
+				style == SCE_VHDL_STRINGEOL);
 
 		case SCLEX_CAML:
 			return (style == SCE_CAML_CHAR ||

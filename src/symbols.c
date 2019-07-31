@@ -1,9 +1,7 @@
 /*
  *      symbols.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2006-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
- *      Copyright 2011-2012 Colomban Wendling <ban(at)herbesfolles(dot)org>
+ *      Copyright 2006 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -119,7 +117,7 @@ symbol_menu;
 
 static void load_user_tags(GeanyFiletypeID ft_id);
 
-/* get the tags_ignore list, exported by tagmanager's options.c */
+/* get the tags_ignore list, exported by tagmanager's geany.c */
 extern gchar **c_tags_ignore;
 
 /* ignore certain tokens when parsing C-like syntax.
@@ -492,10 +490,12 @@ static void add_top_level_items(GeanyDocument *doc)
 			tag_list_add_groups(tag_store,
 				&tv_iters.tag_class, _("Program"), ICON_CLASS,
 				&tv_iters.tag_function, _("File"), ICON_METHOD,
+				&tv_iters.tag_interface, _("Divisions"), ICON_NAMESPACE,
 				&tv_iters.tag_namespace, _("Sections"), ICON_NAMESPACE,
 				&tv_iters.tag_macro, _("Paragraph"), ICON_OTHER,
 				&tv_iters.tag_struct, _("Group"), ICON_STRUCT,
 				&tv_iters.tag_variable, _("Data"), ICON_VAR,
+				&tv_iters.tag_externvar, _("Copies"), ICON_NAMESPACE,
 				NULL);
 			break;
 		case GEANY_FILETYPES_CONF:
@@ -720,6 +720,7 @@ static void add_top_level_items(GeanyDocument *doc)
 		case GEANY_FILETYPES_AS:
 		{
 			tag_list_add_groups(tag_store,
+				&(tv_iters.tag_externvar), _("Imports"), ICON_NAMESPACE,
 				&(tv_iters.tag_namespace), _("Package"), ICON_NAMESPACE,
 				&(tv_iters.tag_interface), _("Interfaces"), ICON_STRUCT,
 				&(tv_iters.tag_class), _("Classes"), ICON_CLASS,
@@ -907,6 +908,18 @@ static const gchar *get_symbol_name(GeanyDocument *doc, const TMTag *tag, gboole
 static gchar *get_symbol_tooltip(GeanyDocument *doc, const TMTag *tag)
 {
 	gchar *utf8_name = editor_get_calltip_text(doc->editor, tag);
+
+	if (!utf8_name && tag->var_type &&
+		tag->type & (tm_tag_field_t | tm_tag_member_t | tm_tag_variable_t | tm_tag_externvar_t))
+	{
+		if (tag->lang != TM_PARSER_PASCAL && tag->lang != TM_PARSER_GO)
+			utf8_name = g_strconcat(tag->var_type, " ", tag->name, NULL);
+		else
+		{
+			const gchar *sep = tag->lang == TM_PARSER_PASCAL ? " : " : " ";
+			utf8_name = g_strconcat(tag->name, sep, tag->var_type, NULL);
+		}
+	}
 
 	/* encodings_convert_to_utf8_from_charset() fails with charset "None", so skip conversion
 	 * for None at this point completely */
@@ -1933,15 +1946,23 @@ static void show_goto_popup(GeanyDocument *doc, GPtrArray *tags, gboolean have_b
 	GdkEventButton *button_event = NULL;
 	TMTag *tmtag;
 	guint i;
-
+	gchar **short_names, **file_names;
 	menu = gtk_menu_new();
+
+	/* If popup would show multiple files present a smart file list that allows
+	 * to easily distinguish the files while avoiding the file paths in their entirety */
+	file_names = g_new(gchar *, tags->len);
+	foreach_ptr_array(tmtag, i, tags)
+		file_names[i] = tmtag->file->file_name;
+	short_names = utils_strv_shorten_file_list(file_names, tags->len);
+	g_free(file_names);
 
 	foreach_ptr_array(tmtag, i, tags)
 	{
 		GtkWidget *item;
 		GtkWidget *label;
 		GtkWidget *image;
-		gchar *fname = g_path_get_basename(tmtag->file->file_name);
+		gchar *fname = short_names[i];
 		gchar *text;
 
 		if (! first && have_best)
@@ -1953,7 +1974,7 @@ static void show_goto_popup(GeanyDocument *doc, GPtrArray *tags, gboolean have_b
 
 		image = gtk_image_new_from_pixbuf(symbols_icons[get_tag_class(tmtag)].pixbuf);
 		label = g_object_new(GTK_TYPE_LABEL, "label", text, "use-markup", TRUE, "xalign", 0.0, NULL);
-		item = g_object_new(GTK_TYPE_IMAGE_MENU_ITEM, "image", image, "child", label, NULL);
+		item = g_object_new(GTK_TYPE_IMAGE_MENU_ITEM, "image", image, "child", label, "always-show-image", TRUE, NULL);
 		g_signal_connect_data(item, "activate", G_CALLBACK(on_goto_popup_item_activate),
 		                      tm_tag_ref(tmtag), (GClosureNotify) tm_tag_unref, 0);
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
@@ -1964,6 +1985,7 @@ static void show_goto_popup(GeanyDocument *doc, GPtrArray *tags, gboolean have_b
 		g_free(text);
 		g_free(fname);
 	}
+	g_free(short_names);
 
 	gtk_widget_show_all(menu);
 
