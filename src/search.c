@@ -1,8 +1,7 @@
 /*
  *      search.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2006-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2006 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -329,7 +328,7 @@ static GtkWidget *add_find_checkboxes(GtkDialog *dialog)
 	gtk_button_set_focus_on_click(GTK_BUTTON(check_multiline), FALSE);
 	gtk_widget_set_tooltip_text(check_multiline, _("Perform regular expression "
 		"matching on the whole buffer at once rather than line by line, allowing "
-		"matches to span multiple lines.  In this mode, newline characters are part "
+		"matches to span multiple lines. In this mode, newline characters are part "
 		"of the input and can be captured as normal characters by the pattern."));
 
 	/* Search features */
@@ -1705,7 +1704,7 @@ search_find_in_files(const gchar *utf8_search_text, const gchar *utf8_dir, const
 		NULL, &error))
  	{
 		gchar *utf8_str;
- 
+
  		ui_progress_bar_start(_("Searching..."));
  		msgwin_set_messages_dir(dir);
 		utf8_str = g_strdup_printf(_("%s %s -- %s (in directory: %s)"),

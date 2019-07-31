@@ -1,139 +1,321 @@
-Description: Add additional themes and templates
+Description: Include Parrot OS templates and customizations
 Author: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+Last-Update: 2019-07-31
 
-Index: geany/data/colorschemes/00frozenbox.conf
-===================================================================
---- /dev/null
-+++ geany/data/colorschemes/00frozenbox.conf
-@@ -0,0 +1,124 @@
-+#
-+# Copyright 2016 Lorenzo Faletra <eclipse@frozenbox.org>
-+#
-+# This program is free software; you can redistribute it and/or modify
-+# it under the terms of the GNU General Public License as published by
-+# the Free Software Foundation; either version 2 of the License, or
-+# (at your option) any later version.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU General Public License for more details.
-+#
-+# You should have received a copy of the GNU General Public License
-+# along with this program; if not, write to the Free Software
-+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-+# MA 02110-1301, USA.
-+#
-+# Ported from the IntelliJ Darcula theme by Jiri Techet
-+#
+--- geany-1.35.orig/data/Makefile.am
++++ geany-1.35/data/Makefile.am
+@@ -1,77 +1,109 @@
+ 
+ colorschemes = \
+-	colorschemes/alt.conf
++	colorschemes/alt.conf \
++	colorschemes/bespin.conf \
++	colorschemes/black.conf \
++	colorschemes/darcula.conf \
++	colorschemes/dark-fruit-salad.conf \
++	colorschemes/dark.conf \
++	colorschemes/fluffy.conf \
++	colorschemes/gedit.conf \
++	colorschemes/github.conf \
++	colorschemes/himbeere.conf \
++	colorschemes/inkpot.conf \
++	colorschemes/kugel.conf \
++	colorschemes/mc.conf \
++	colorschemes/metallic-bottle.conf \
++	colorschemes/monokai.conf \
++	colorschemes/notepad-plus-plus.conf \
++	colorschemes/oblivion2.conf \
++	colorschemes/parrot.conf \
++	colorschemes/pygments.conf \
++	colorschemes/railcasts2.conf \
++	colorschemes/retro.conf \
++	colorschemes/sleepy-pastel.conf \
++	colorschemes/slushpoppies.conf \
++	colorschemes/solarized-dark.conf \
++	colorschemes/solarized-light.conf \
++	colorschemes/spyder-dark.conf \
++	colorschemes/steampunk.conf \
++	colorschemes/tango-dark.conf \
++	colorschemes/tango-light.conf \
++	colorschemes/tinge.conf \
++	colorschemes/ubuntu.conf \
++	colorschemes/vibrant-ink.conf \
++	colorschemes/zenburn.conf
+ 
+ filetypes = \
+-	filedefs/filetypes.abaqus \
+-	filedefs/filetypes.abc \
++	filedefs/filetypes.cmake \
+ 	filedefs/filetypes.actionscript \
+-	filedefs/filetypes.ada \
++	filedefs/filetypes.css \
++	filedefs/filetypes.perl \
++	filedefs/filetypes.Genie.conf \
+ 	filedefs/filetypes.Arduino.conf \
+-	filedefs/filetypes.asciidoc \
+-	filedefs/filetypes.asm \
+-	filedefs/filetypes.batch \
+-	filedefs/filetypes.c \
+-	filedefs/filetypes.caml \
+ 	filedefs/filetypes.Clojure.conf \
+-	filedefs/filetypes.cmake \
+-	filedefs/filetypes.cobol \
+-	filedefs/filetypes.coffeescript \
+-	filedefs/filetypes.common \
+-	filedefs/filetypes.conf \
+-	filedefs/filetypes.cpp \
+-	filedefs/filetypes.cs \
+-	filedefs/filetypes.css \
+-	filedefs/filetypes.CUDA.conf \
+-	filedefs/filetypes.Cython.conf \
+-	filedefs/filetypes.d \
++	filedefs/filetypes.po \
++	filedefs/filetypes.c \
+ 	filedefs/filetypes.diff \
+-	filedefs/filetypes.docbook \
+-	filedefs/filetypes.erlang \
+-	filedefs/filetypes.f77 \
+-	filedefs/filetypes.ferite \
+-	filedefs/filetypes.forth \
++	filedefs/filetypes.lua \
+ 	filedefs/filetypes.fortran \
+-	filedefs/filetypes.freebasic \
+-	filedefs/filetypes.Genie.conf \
+-	filedefs/filetypes.glsl \
+-	filedefs/filetypes.go \
+-	filedefs/filetypes.Graphviz.conf \
++	filedefs/filetypes.JSON.conf \
++	filedefs/filetypes.vhdl \
++	filedefs/filetypes.forth \
+ 	filedefs/filetypes.haskell \
+-	filedefs/filetypes.haxe \
++	filedefs/filetypes.ferite \
++	filedefs/filetypes.php \
++	filedefs/filetypes.verilog \
++	filedefs/filetypes.caml \
++	filedefs/filetypes.sql \
++	filedefs/filetypes.batch \
+ 	filedefs/filetypes.html \
+-	filedefs/filetypes.java \
+-	filedefs/filetypes.javascript \
+-	filedefs/filetypes.JSON.conf \
+-	filedefs/filetypes.latex \
+-	filedefs/filetypes.lisp \
+-	filedefs/filetypes.lua \
+-	filedefs/filetypes.makefile \
++	filedefs/filetypes.go \
++	filedefs/filetypes.ada \
++	filedefs/filetypes.Cython.conf \
++	filedefs/filetypes.abaqus \
+ 	filedefs/filetypes.markdown \
+-	filedefs/filetypes.matlab \
+-	filedefs/filetypes.nsis \
+-	filedefs/filetypes.objectivec \
+-	filedefs/filetypes.pascal \
+-	filedefs/filetypes.perl \
+-	filedefs/filetypes.php \
+-	filedefs/filetypes.po \
++	filedefs/filetypes.lisp \
++	filedefs/filetypes.tcl \
++	filedefs/filetypes.CUDA.conf \
++	filedefs/filetypes.yaml \
++	filedefs/filetypes.restructuredtext \
++	filedefs/filetypes.javascript \
++	filedefs/filetypes.f77 \
++	filedefs/filetypes.cs \
++	filedefs/filetypes.xml \
+ 	filedefs/filetypes.powershell \
+-	filedefs/filetypes.python \
+ 	filedefs/filetypes.r \
+-	filedefs/filetypes.restructuredtext \
+-	filedefs/filetypes.ruby \
++	filedefs/filetypes.d \
++	filedefs/filetypes.coffeescript \
++	filedefs/filetypes.asm \
+ 	filedefs/filetypes.rust \
+-	filedefs/filetypes.Scala.conf \
+ 	filedefs/filetypes.sh \
+-	filedefs/filetypes.sql \
+-	filedefs/filetypes.tcl \
+-	filedefs/filetypes.txt2tags \
++	filedefs/filetypes.freebasic \
++	filedefs/filetypes.conf \
++	filedefs/filetypes.abc \
++	filedefs/filetypes.ruby \
++	filedefs/filetypes.glsl \
++	filedefs/filetypes.makefile \
++	filedefs/filetypes.Graphviz.conf \
++	filedefs/filetypes.nsis \
++	filedefs/filetypes.pascal \
++	filedefs/filetypes.cobol \
++	filedefs/filetypes.java \
++	filedefs/filetypes.python \
++	filedefs/filetypes.objectivec \
++	filedefs/filetypes.cpp \
++	filedefs/filetypes.common \
++	filedefs/filetypes.zephir \
+ 	filedefs/filetypes.vala \
+-	filedefs/filetypes.verilog \
+-	filedefs/filetypes.vhdl \
+-	filedefs/filetypes.xml \
+-	filedefs/filetypes.yaml \
+-	filedefs/filetypes.zephir
++	filedefs/filetypes.erlang \
++	filedefs/filetypes.txt2tags \
++	filedefs/filetypes.matlab \
++	filedefs/filetypes.haxe \
++	filedefs/filetypes.latex \
++	filedefs/filetypes.asciidoc \
++	filedefs/filetypes.docbook \
++	filedefs/filetypes.Scala.conf
+ 
+ tagfiles = \
+ 	tags/std99.c.tags \
+@@ -81,19 +113,29 @@ tagfiles = \
+ 	tags/entities.html.tags
+ 
+ template_files = \
+-	templates/files/file.html \
+-	templates/files/file_html5.html \
+-	templates/files/file.php \
+-	templates/files/file.rb \
+-	templates/files/file.tex \
++	templates/files/module.erl \
++	templates/files/main.d \
+ 	templates/files/main.c \
++	templates/files/Main.java \
++	templates/files/bash.sh \
++	templates/files/dotnet.cs \
++	templates/files/falcon.fal \
++	templates/files/golang.go \
++	templates/files/latex.tex \
++	templates/files/main.cpp \
+ 	templates/files/main.cxx \
+-	templates/files/main.d \
+-	templates/files/main.java \
+-	templates/files/main.py \
++	templates/files/main.rs \
++	templates/files/main.s \
+ 	templates/files/main.vala \
+-	templates/files/module.erl \
+-	templates/files/program.pas
++	templates/files/pascal.pas \
++	templates/files/perl.pl \
++	templates/files/perlModule.pm \
++	templates/files/python2.py \
++	templates/files/python3.py \
++	templates/files/ruby.rb \
++	templates/files/web.css \
++	templates/files/web.html \
++	templates/files/web.php 
+ 
+ templates = \
+ 	templates/bsd \
+--- geany-1.35.orig/data/Makefile.in
++++ geany-1.35/data/Makefile.in
+@@ -201,7 +201,7 @@ am__nobase_strip = \
+   for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
+ am__nobase_list = $(am__nobase_strip_setup); \
+   for p in $$list; do echo "$$p $$p"; done | \
+-  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
++  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ 	; s,\( .*\)/[^/]*$$,\1,' | \
+   $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
+     if (++n[$$2] == $(am__install_max)) \
+       { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
+@@ -402,7 +402,40 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ colorschemes = \
+-	colorschemes/alt.conf
++	colorschemes/00frozenbox.conf \
++	colorschemes/alt.conf \
++	colorschemes/bespin.conf \
++	colorschemes/black.conf \
++	colorschemes/darcula.conf \
++	colorschemes/dark-fruit-salad.conf \
++	colorschemes/dark.conf \
++	colorschemes/fluffy.conf \
++	colorschemes/gedit.conf \
++	colorschemes/github.conf \
++	colorschemes/himbeere.conf \
++	colorschemes/inkpot.conf \
++	colorschemes/kugel.conf \
++	colorschemes/mc.conf \
++	colorschemes/metallic-bottle.conf \
++	colorschemes/monokai.conf \
++	colorschemes/notepad-plus-plus.conf \
++	colorschemes/oblivion2.conf \
++	colorschemes/pygments.conf \
++	colorschemes/railcasts2.conf \
++	colorschemes/retro.conf \
++	colorschemes/sleepy-pastel.conf \
++	colorschemes/slushpoppies.conf \
++	colorschemes/solarized-dark.conf \
++	colorschemes/solarized-light.conf \
++	colorschemes/spyder-dark.conf \
++	colorschemes/steampunk.conf \
++	colorschemes/tango-dark.conf \
++	colorschemes/tango-light.conf \
++	colorschemes/tinge.conf \
++	colorschemes/ubuntu.conf \
++	colorschemes/vibrant-ink.conf \
++	colorschemes/zenburn.conf
 +
-+[theme_info]
-+name=Default FrozenBox
-+description=A dark theme developed for Parrot Security OS and inspired to IntelliJ Darcula theme.
-+# incremented automatically, do not change manually
-+version=1
-+author=Lorenzo "EclipseSpark" Faletra <eclipse@frozenbox.org>
-+url=https://github.com/codebrainz/geany-themes
-+# list of each compatible Geany release version
-+compat=1.22;1.23;1.23.1;1.24
+ 
+ filetypes = \
+ 	filedefs/filetypes.abaqus \
+@@ -483,19 +516,30 @@ tagfiles = \
+ 	tags/entities.html.tags
+ 
+ template_files = \
+-	templates/files/file.html \
+-	templates/files/file_html5.html \
+-	templates/files/file.php \
+-	templates/files/file.rb \
+-	templates/files/file.tex \
+ 	templates/files/main.c \
++	templates/files/module.erl \
+ 	templates/files/main.cxx \
+-	templates/files/main.d \
++	templates/files/file_html5.html \
++	templates/files/file.rb \
++	templates/files/program.pas \
+ 	templates/files/main.java \
++	templates/files/main.d \
+ 	templates/files/main.py \
++	templates/files/file.tex \
++	templates/files/file.php \
++	templates/files/file.html \
++	templates/files/bash.sh \
++	templates/files/falcon.fal \
++	templates/files/main.cpp \
++	templates/files/main.rs \
+ 	templates/files/main.vala \
+-	templates/files/module.erl \
+-	templates/files/program.pas
++	templates/files/pascal.pas \
++	templates/files/perl.pl \
++	templates/files/perlModule.pm \
++	templates/files/python.py \
++	templates/files/ruby.rb \
++	templates/files/style.css
 +
-+[named_colors]
-+fg=#dfdfff
-+bg=#161a1a
-+
-+[named_styles]
-+
-+default=fg;bg;false;false 
-+error=#c85550;;;true
-+
-+# Editor styles
-+#-------------------------------------------------------------------------------
-+
-+selection=;#2f5692;;true
-+current_line=;#434343;true
-+brace_good=ffef4c;#4d6360;true
-+brace_bad=#c85550;#434343;true
-+margin_line_number=#989898;#424446
-+margin_folding=#888;#4c4c4c
-+fold_symbol_highlight=#4c4c4c
-+indent_guide=#505050
-+caret=#c6c6c6
-+marker_line=#424446;ffef4c
-+marker_search=;ffef4c
-+marker_mark=#424446;ffef4c
-+call_tips=#555;#ddd;true;true
-+white_space=#505050;;true
-+
-+# Programming languages
-+#-------------------------------------------------------------------------------
-+
-+comment=#919191
-+comment_doc=#73a46a
-+comment_line=comment
-+comment_line_doc=comment_doc
-+comment_doc_keyword=comment_doc,bold
-+comment_doc_keyword_error=comment_doc,italic
-+
-+number=#4176CB
-+number_1=number
-+number_2=number_1
-+
-+type=#a88ab6
-+class=type
-+function=#207ADA
-+parameter=function
-+
-+keyword=#00fff7
-+keyword_1=keyword
-+keyword_2=#9196bf
-+keyword_3=keyword_1
-+keyword_4=keyword_1
-+
-+identifier=default
-+identifier_1=identifier
-+identifier_2=identifier_1
-+identifier_3=identifier_1
-+identifier_4=identifier_1
-+
-+string=#269926
-+string_1=string
-+string_2=string_1
-+string_3=default
-+string_4=default
-+string_eol=string_1,italic
-+character=string_1
-+backticks=string_2
-+here_doc=string_2
-+
-+scalar=string_2
-+label=default,bold
-+preprocessor=#207ADA
-+regex=number_1
-+operator=default
-+decorator=#207ADA
-+other=#12f0ef
-+
-+# Markup-type languages
-+#-------------------------------------------------------------------------------
-+
-+tag=#207ADA
-+tag_unknown=#209aca
-+tag_end=tag
-+attribute=#00fff7
-+attribute_unknown=#10efff
-+value=#269926
-+entity=#4176CB
-+
-+# Diff
-+#-------------------------------------------------------------------------------
-+
-+line_added=#558266
-+line_removed=#a0665b
-+line_changed=preprocessor
-Index: geany/data/colorschemes/alt.conf
-===================================================================
---- geany.orig/data/colorschemes/alt.conf
-+++ geany/data/colorschemes/alt.conf
+ 
+ templates = \
+ 	templates/bsd \
+@@ -528,8 +572,8 @@ Makefile: $(srcdir)/Makefile.in $(top_bu
+ 	  *config.status*) \
+ 	    cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh;; \
+ 	  *) \
+-	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
+-	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
++	    echo ' cd $(top_builddir) && $(SHELL) 	config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
++	    cd $(top_builddir) && $(SHELL) 	config.status $(subdir)/$@ $(am__depfiles_maybe);; \
+ 	esac;
+ 
+ $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
+--- geany-1.35.orig/data/colorschemes/alt.conf
++++ geany-1.35/data/colorschemes/alt.conf
 @@ -5,51 +5,55 @@ version=0.01
  author=
  url=
@@ -267,10 +449,8 @@ Index: geany/data/colorschemes/alt.conf
 +line_added=#558266
 +line_removed=#a0665b
  line_changed=preprocessor
-Index: geany/data/colorschemes/bespin.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/bespin.conf
++++ geany-1.35/data/colorschemes/bespin.conf
 @@ -0,0 +1,121 @@
 +#
 +# This file was generated from a textmate theme named Bespin
@@ -393,10 +573,8 @@ Index: geany/data/colorschemes/bespin.conf
 +line_added=#f8f8f8;#253b22
 +line_removed=#f8f8f8;#420e09
 +line_changed=#f8f8f8;#4a410d
-Index: geany/data/colorschemes/black.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/black.conf
++++ geany-1.35/data/colorschemes/black.conf
 @@ -0,0 +1,125 @@
 +#
 +# Copyright 2013 Paul Lenton (EckoZero) <lentonp(at)gmail(dot)com>
@@ -523,10 +701,8 @@ Index: geany/data/colorschemes/black.conf
 +line_added=#00f5ff;#000;false;false
 +line_removed=#ff0;#000;false;false
 +line_changed=#399;#000;false;false
-Index: geany/data/colorschemes/darcula.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/darcula.conf
++++ geany-1.35/data/colorschemes/darcula.conf
 @@ -0,0 +1,149 @@
 +#
 +# Copyright 2015 Jiri Techet <techet(at)gmail(dot)com>
@@ -677,10 +853,8 @@ Index: geany/data/colorschemes/darcula.conf
 +line_added=diff_added_green
 +line_removed=diff_removed_red
 +line_changed=preprocessor
-Index: geany/data/colorschemes/dark-fruit-salad.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/dark-fruit-salad.conf
++++ geany-1.35/data/colorschemes/dark-fruit-salad.conf
 @@ -0,0 +1,121 @@
 +#
 +# Copyright 2011 John Gabriele <jmg3000(at)gmail(dot)com>
@@ -803,10 +977,8 @@ Index: geany/data/colorschemes/dark-fruit-salad.conf
 +line_added=#8ae234
 +line_removed=#e1e17a
 +line_changed=preprocessor
-Index: geany/data/colorschemes/dark.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/dark.conf
++++ geany-1.35/data/colorschemes/dark.conf
 @@ -0,0 +1,120 @@
 +#
 +# Copyright 2011 Duncan Lock <duncan.lock(at)gmail(dot)com>
@@ -928,10 +1100,8 @@ Index: geany/data/colorschemes/dark.conf
 +line_added=#008b8b
 +line_removed=#6a5acd
 +line_changed=preprocessor
-Index: geany/data/colorschemes/fluffy.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/fluffy.conf
++++ geany-1.35/data/colorschemes/fluffy.conf
 @@ -0,0 +1,128 @@
 +#
 +# No explicit license available but part of the `gedit-themes`
@@ -1061,10 +1231,8 @@ Index: geany/data/colorschemes/fluffy.conf
 +line_added=green
 +line_removed=red
 +line_changed=cyan
-Index: geany/data/colorschemes/gedit.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/gedit.conf
++++ geany-1.35/data/colorschemes/gedit.conf
 @@ -0,0 +1,120 @@
 +#
 +# Copyright 2006-2007 GtkSourceView team
@@ -1186,10 +1354,8 @@ Index: geany/data/colorschemes/gedit.conf
 +line_added=#008b8b
 +line_removed=attribute
 +line_changed=preprocessor
-Index: geany/data/colorschemes/github.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/github.conf
++++ geany-1.35/data/colorschemes/github.conf
 @@ -0,0 +1,122 @@
 +#
 +# Copyright 2009 Felipe Mesquita <fmesquitacunha(at)gmail(dot)com>
@@ -1313,10 +1479,8 @@ Index: geany/data/colorschemes/github.conf
 +line_added=#000;#dfd
 +line_removed=#000;#fdd
 +line_changed=#000;#ffc
-Index: geany/data/colorschemes/himbeere.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/himbeere.conf
++++ geany-1.35/data/colorschemes/himbeere.conf
 @@ -0,0 +1,135 @@
 +#
 +# This library is free software; you can redistribute it and/or
@@ -1453,10 +1617,8 @@ Index: geany/data/colorschemes/himbeere.conf
 +line_added=green
 +line_removed=red
 +line_changed=blue
-Index: geany/data/colorschemes/inkpot.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/inkpot.conf
++++ geany-1.35/data/colorschemes/inkpot.conf
 @@ -0,0 +1,118 @@
 +#
 +# Copyright 2012 Campbell Barton <ideasman42(at)gmail(dot)com>
@@ -1576,10 +1738,8 @@ Index: geany/data/colorschemes/inkpot.conf
 +line_added=#0a0
 +line_removed=#f00
 +line_changed=#e7b937
-Index: geany/data/colorschemes/kugel.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/kugel.conf
++++ geany-1.35/data/colorschemes/kugel.conf
 @@ -0,0 +1,132 @@
 +#
 +# Copyright 2011 Thomas Martitz <thomas.martitz(at)student.htw-berlin(dot)de>
@@ -1713,10 +1873,8 @@ Index: geany/data/colorschemes/kugel.conf
 +line_added=#34b034
 +line_removed=#ff2727
 +line_changed=#7f007f
-Index: geany/data/colorschemes/mc.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/mc.conf
++++ geany-1.35/data/colorschemes/mc.conf
 @@ -0,0 +1,117 @@
 +#
 +# Copyright 2012 Henrik Pauli <ralesk@drangolin.net>
@@ -1835,10 +1993,8 @@ Index: geany/data/colorschemes/mc.conf
 +line_added=#008b8b
 +line_removed=#6a5acd
 +line_changed=preprocessor
-Index: geany/data/colorschemes/metallic-bottle.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/metallic-bottle.conf
++++ geany-1.35/data/colorschemes/metallic-bottle.conf
 @@ -0,0 +1,115 @@
 +###
 +# Copyright 2013 Tomasz Wyderka <wyderkat(at)cofoh(dot)com>
@@ -1955,10 +2111,8 @@ Index: geany/data/colorschemes/metallic-bottle.conf
 +line_added=#c48c65
 +line_removed=#843121
 +line_changed=#fbfaf9
-Index: geany/data/colorschemes/monokai.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/monokai.conf
++++ geany-1.35/data/colorschemes/monokai.conf
 @@ -0,0 +1,131 @@
 +# No explicit license available
 +#
@@ -2091,10 +2245,8 @@ Index: geany/data/colorschemes/monokai.conf
 +line_added=green
 +line_removed=red
 +line_changed=preprocessor
-Index: geany/data/colorschemes/notepad-plus-plus.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/notepad-plus-plus.conf
++++ geany-1.35/data/colorschemes/notepad-plus-plus.conf
 @@ -0,0 +1,122 @@
 +#
 +# Copyright 2013 Paul <phpbased.net@gmail.com>
@@ -2218,10 +2370,8 @@ Index: geany/data/colorschemes/notepad-plus-plus.conf
 +line_added=#3de737
 +line_removed=#e74837
 +line_changed=#e7b937
-Index: geany/data/colorschemes/oblivion2.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/oblivion2.conf
++++ geany-1.35/data/colorschemes/oblivion2.conf
 @@ -0,0 +1,120 @@
 +#
 +# Copyright Bernhard Posselt <bernhard.posselt(at)gmx(dot)at>
@@ -2343,10 +2493,135 @@ Index: geany/data/colorschemes/oblivion2.conf
 +line_added=#729fcf;#2e3436;true;false
 +line_removed=#8ae234;#2e3436;true;false
 +line_changed=#fff;#fff;true;false
-Index: geany/data/colorschemes/pygments.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/pygments.conf
++++ geany-1.35/data/colorschemes/parrot.conf
+@@ -0,0 +1,124 @@
++#
++# Copyright 2016 Lorenzo Faletra <eclipse@frozenbox.org>
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++# MA 02110-1301, USA.
++#
++# Ported from the IntelliJ Darcula theme by Jiri Techet
++#
++
++[theme_info]
++name=Parrot (default)
++description=A dark theme developed for Parrot OS and inspired to IntelliJ Darcula theme.
++# incremented automatically, do not change manually
++version=1
++author=Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
++url=https://github.com/codebrainz/geany-themes
++# list of each compatible Geany release version
++compat=1.22;1.23;1.23.1;1.24
++
++[named_colors]
++fg=#dfdfff
++bg=#161a1a
++
++[named_styles]
++
++default=fg;bg;false;false 
++error=#c85550;;;true
++
++# Editor styles
++#-------------------------------------------------------------------------------
++
++selection=;#2f5692;;true
++current_line=;#434343;true
++brace_good=ffef4c;#4d6360;true
++brace_bad=#c85550;#434343;true
++margin_line_number=#989898;#424446
++margin_folding=#888;#4c4c4c
++fold_symbol_highlight=#4c4c4c
++indent_guide=#505050
++caret=#c6c6c6
++marker_line=#424446;ffef4c
++marker_search=;ffef4c
++marker_mark=#424446;ffef4c
++call_tips=#555;#ddd;true;true
++white_space=#505050;;true
++
++# Programming languages
++#-------------------------------------------------------------------------------
++
++comment=#919191
++comment_doc=#73a46a
++comment_line=comment
++comment_line_doc=comment_doc
++comment_doc_keyword=comment_doc,bold
++comment_doc_keyword_error=comment_doc,italic
++
++number=#4176CB
++number_1=number
++number_2=number_1
++
++type=#a88ab6
++class=type
++function=#207ADA
++parameter=function
++
++keyword=#00fff7
++keyword_1=keyword
++keyword_2=#9196bf
++keyword_3=keyword_1
++keyword_4=keyword_1
++
++identifier=default
++identifier_1=identifier
++identifier_2=identifier_1
++identifier_3=identifier_1
++identifier_4=identifier_1
++
++string=#269926
++string_1=string
++string_2=string_1
++string_3=default
++string_4=default
++string_eol=string_1,italic
++character=string_1
++backticks=string_2
++here_doc=string_2
++
++scalar=string_2
++label=default,bold
++preprocessor=#207ADA
++regex=number_1
++operator=default
++decorator=#207ADA
++other=#12f0ef
++
++# Markup-type languages
++#-------------------------------------------------------------------------------
++
++tag=#207ADA
++tag_unknown=#209aca
++tag_end=tag
++attribute=#00fff7
++attribute_unknown=#10efff
++value=#269926
++entity=#4176CB
++
++# Diff
++#-------------------------------------------------------------------------------
++
++line_added=#558266
++line_removed=#a0665b
++line_changed=preprocessor
+--- /dev/null
++++ geany-1.35/data/colorschemes/pygments.conf
 @@ -0,0 +1,131 @@
 +#
 +# Copyright (c) 2006-2012 by the respective authors.
@@ -2479,10 +2754,8 @@ Index: geany/data/colorschemes/pygments.conf
 +line_added=#256a1b
 +line_removed=#a40000
 +line_changed=#ce5c00
-Index: geany/data/colorschemes/railcasts2.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/railcasts2.conf
++++ geany-1.35/data/colorschemes/railcasts2.conf
 @@ -0,0 +1,110 @@
 +#
 +# No explicit license or copyright info available but part of the
@@ -2594,10 +2867,8 @@ Index: geany/data/colorschemes/railcasts2.conf
 +
 +# Make style changes in colorscheme .conf file, make style mapping
 +# changes below.
-Index: geany/data/colorschemes/retro.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/retro.conf
++++ geany-1.35/data/colorschemes/retro.conf
 @@ -0,0 +1,116 @@
 +#
 +# Copyright 2011 Matthew Brush <mbrush(at)codebrainz(dot)ca>
@@ -2715,10 +2986,8 @@ Index: geany/data/colorschemes/retro.conf
 +line_added=#0c0
 +line_removed=#c00
 +line_changed=#00c
-Index: geany/data/colorschemes/sleepy-pastel.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/sleepy-pastel.conf
++++ geany-1.35/data/colorschemes/sleepy-pastel.conf
 @@ -0,0 +1,102 @@
 +#
 +# Public Domain
@@ -2822,10 +3091,8 @@ Index: geany/data/colorschemes/sleepy-pastel.conf
 +line_added=#79c580
 +line_removed=#dc8383
 +line_changed=#c0afd3
-Index: geany/data/colorschemes/slushpoppies.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/slushpoppies.conf
++++ geany-1.35/data/colorschemes/slushpoppies.conf
 @@ -0,0 +1,120 @@
 +#
 +# Copyright 2006-2007 Will Farrington <wcfarrington(at)gmail(dot)com>
@@ -2947,10 +3214,8 @@ Index: geany/data/colorschemes/slushpoppies.conf
 +line_added=#008b8b
 +line_removed=#6a5acd
 +line_changed=preprocessor
-Index: geany/data/colorschemes/solarized-dark.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/solarized-dark.conf
++++ geany-1.35/data/colorschemes/solarized-dark.conf
 @@ -0,0 +1,147 @@
 +#
 +# Copyright 2011 Ethan Schoonover <es(at)ethanschoonover(dot)com>
@@ -3099,10 +3364,8 @@ Index: geany/data/colorschemes/solarized-dark.conf
 +line_added=green
 +line_removed=red
 +line_changed=blue
-Index: geany/data/colorschemes/solarized-light.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/solarized-light.conf
++++ geany-1.35/data/colorschemes/solarized-light.conf
 @@ -0,0 +1,147 @@
 +#
 +# Copyright 2011 Ethan Schoonover <es(at)ethanschoonover(dot)com>
@@ -3251,10 +3514,8 @@ Index: geany/data/colorschemes/solarized-light.conf
 +line_added=green
 +line_removed=red
 +line_changed=blue
-Index: geany/data/colorschemes/spyder-dark.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/spyder-dark.conf
++++ geany-1.35/data/colorschemes/spyder-dark.conf
 @@ -0,0 +1,118 @@
 +#
 +# Copyright 2013 Paul Thompson <redoubts(at)gmail(dot)com>
@@ -3374,10 +3635,8 @@ Index: geany/data/colorschemes/spyder-dark.conf
 +line_removed=#729fcf;#131926;true;false
 +line_added=#8ae234;#131926;true;false
 +line_changed=#000;#fff;true;false
-Index: geany/data/colorschemes/steampunk.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/steampunk.conf
++++ geany-1.35/data/colorschemes/steampunk.conf
 @@ -0,0 +1,123 @@
 +#
 +# Copyright 2013 Baptiste Darthenay <geany(dot)batisteo(at)recursor(dot)net>
@@ -3502,10 +3761,8 @@ Index: geany/data/colorschemes/steampunk.conf
 +line_added=#595
 +line_removed=#a66
 +line_changed=preprocessor
-Index: geany/data/colorschemes/tango-dark.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/tango-dark.conf
++++ geany-1.35/data/colorschemes/tango-dark.conf
 @@ -0,0 +1,113 @@
 +#
 +# Copyright Barry van Oudtshoorn
@@ -3620,10 +3877,8 @@ Index: geany/data/colorschemes/tango-dark.conf
 +line_added=#008b8b
 +line_removed=#6a5acd
 +line_changed=preprocessor
-Index: geany/data/colorschemes/tango-light.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/tango-light.conf
++++ geany-1.35/data/colorschemes/tango-light.conf
 @@ -0,0 +1,120 @@
 +#
 +# Copyright 2011 Colomban Wendling <lists.ban@herbesfolles.org>
@@ -3745,10 +4000,8 @@ Index: geany/data/colorschemes/tango-light.conf
 +line_added=#4e9a06
 +line_removed=#a40000
 +line_changed=#ce5c00
-Index: geany/data/colorschemes/tinge.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/tinge.conf
++++ geany-1.35/data/colorschemes/tinge.conf
 @@ -0,0 +1,128 @@
 +#
 +# Copyright (C) 2008 - Harsh J <harshj(at)gmail(dot)com>
@@ -3878,10 +4131,8 @@ Index: geany/data/colorschemes/tinge.conf
 +line_added=#ff3a35
 +line_removed=#ff79d9
 +line_changed=#f90
-Index: geany/data/colorschemes/ubuntu.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/ubuntu.conf
++++ geany-1.35/data/colorschemes/ubuntu.conf
 @@ -0,0 +1,116 @@
 +#
 +# Copyright 2013 James Brierley <jmb8710(at)gmail(dot)com>
@@ -3999,10 +4250,8 @@ Index: geany/data/colorschemes/ubuntu.conf
 +line_added=#008b8b
 +line_removed=#6a5acd
 +line_changed=preprocessor
-Index: geany/data/colorschemes/vibrant-ink.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/vibrant-ink.conf
++++ geany-1.35/data/colorschemes/vibrant-ink.conf
 @@ -0,0 +1,123 @@
 +#
 +# Copyright Jason Wilson <jason.willson(at)gmail(dot)com>
@@ -4127,10 +4376,8 @@ Index: geany/data/colorschemes/vibrant-ink.conf
 +line_added=#399;#000;false;false
 +line_removed=#808040;#000;false;false
 +line_changed=#9c9;#000;false;false
-Index: geany/data/colorschemes/zenburn.conf
-===================================================================
 --- /dev/null
-+++ geany/data/colorschemes/zenburn.conf
++++ geany-1.35/data/colorschemes/zenburn.conf
 @@ -0,0 +1,107 @@
 +#
 +# No explicit license or copyright info available but part of the
@@ -4239,58 +4486,124 @@ Index: geany/data/colorschemes/zenburn.conf
 +line_added=#7f9f7f;;true
 +line_removed=#cc9393;;true
 +line_changed=preprocessor
-Index: geany/data/templates/files/bash.sh
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/bash.sh
-@@ -0,0 +1,2 @@
++++ geany-1.35/data/templates/files/Main.java
+@@ -0,0 +1,9 @@
++{fileheader}
++
++public class {untitled} {
++	
++	public static void main (String[] args) {
++		System.out.println("give me a bottle of rum!");
++	}
++}
++
+--- /dev/null
++++ geany-1.35/data/templates/files/bash.sh
+@@ -0,0 +1,3 @@
 +#!/bin/bash
 +
-Index: geany/data/templates/files/falcon.fal
-===================================================================
++echo "give me a bottle of rum!"
 --- /dev/null
-+++ geany/data/templates/files/falcon.fal
++++ geany-1.35/data/templates/files/dotnet.cs
+@@ -0,0 +1,5 @@
++class HelloWorld {
++    static void Main() {
++        System.Console.WriteLine("give me a bottle of rum!");
++    }
++}
+--- /dev/null
++++ geany-1.35/data/templates/files/falcon.fal
 @@ -0,0 +1,9 @@
-+#!/usr/bin/falcon
++#!/usr/bin/env falcon
 +
-+saying = List("Have", "a", "nice", "day")
++saying = List("give", "me", "a", "bottle", "of", "rum")
 +
 +for elem in saying
 +   >> elem
 +   formiddle: >> " "
 +   forlast: > "!"
 +end
-Index: geany/data/templates/files/main.cpp
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/main.cpp
-@@ -0,0 +1,10 @@
++++ geany-1.35/data/templates/files/golang.go
+@@ -0,0 +1,9 @@
++{fileheader}
++
++package main
++
++import "fmt"
++
++func main() {
++	fmt.Println("give me a bottle of rum!")
++}
+--- /dev/null
++++ geany-1.35/data/templates/files/latex.tex
+@@ -0,0 +1,8 @@
++\documentclass[a4paper]{article}
++\usepackage[T1]{fontenc}
++\usepackage[utf8]{inputenc}
++\usepackage{lmodern}
++\usepackage[english]{babel}
++\begin{document}
++
++\end{document}
+--- /dev/null
++++ geany-1.35/data/templates/files/main.cpp
+@@ -0,0 +1,9 @@
 +{fileheader}
 +
 +#include <iostream>
 +
-+int main(int argc, char **argv)
++main()
 +{
-+	
++	cout << "give me a bottle of rum!" << endl;
 +	return 0;
 +}
-+
-Index: geany/data/templates/files/main.rs
-===================================================================
+--- geany-1.35.orig/data/templates/files/main.cxx
++++ geany-1.35/data/templates/files/main.cxx
+@@ -2,9 +2,9 @@
+ 
+ #include <iostream>
+ 
+-int main(int argc, char **argv)
++main()
+ {
+-	
++	cout << "give me a bottle of rum!" << endl;
+ 	return 0;
+ }
+ 
 --- /dev/null
-+++ geany/data/templates/files/main.rs
-@@ -0,0 +1,7 @@
++++ geany-1.35/data/templates/files/main.rs
+@@ -0,0 +1,6 @@
 +{fileheader}
 +
-+fn main()
-+{
-+       println!("hello world!");
++fn main() {
++    println!("give me a bottle of rum!");
 +}
 +
-Index: geany/data/templates/files/main.vala
-===================================================================
---- geany.orig/data/templates/files/main.vala
-+++ geany/data/templates/files/main.vala
+--- /dev/null
++++ geany-1.35/data/templates/files/main.s
+@@ -0,0 +1,17 @@
++global _start
++
++section .text
++
++_start:
++    mov eax, 0x4
++    mov ebx, 0x1
++    mov ecx, message
++    mov edx, 0xF
++    int 0x80
++
++    mov eax, 0x1
++    mov ebx, 0x0
++    int 0x80
++
++section .data
++    message: db "give me a bottle of rum!", 0dh, 0ah
+--- geany-1.35.orig/data/templates/files/main.vala
++++ geany-1.35/data/templates/files/main.vala
 @@ -1,7 +1,9 @@
  {fileheader}
  
@@ -4304,10 +4617,8 @@ Index: geany/data/templates/files/main.vala
 +        return 0;
 +    }
  }
-Index: geany/data/templates/files/pascal.pas
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/pascal.pas
++++ geany-1.35/data/templates/files/pascal.pas
 @@ -0,0 +1,12 @@
 +{fileheader}
 +
@@ -4321,44 +4632,56 @@ Index: geany/data/templates/files/pascal.pas
 +	
 +END.
 +
-Index: geany/data/templates/files/perl.pl
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/perl.pl
-@@ -0,0 +1,2 @@
++++ geany-1.35/data/templates/files/perl.pl
+@@ -0,0 +1,5 @@
 +#!/usr/bin/perl
 +
-Index: geany/data/templates/files/perlModule.pm
-===================================================================
++{fileheader}
++
++print("give me a bottle of rum!");
 --- /dev/null
-+++ geany/data/templates/files/perlModule.pm
++++ geany-1.35/data/templates/files/perlModule.pm
 @@ -0,0 +1,3 @@
 +package foobar;
 +
 +1;
-Index: geany/data/templates/files/python.py
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/python.py
-@@ -0,0 +1,13 @@
-+#!/usr/bin/env python
++++ geany-1.35/data/templates/files/python2.py
+@@ -0,0 +1,14 @@
++#!/usr/bin/env python2
 +# -*- coding: utf-8 -*-
 +#
 +{fileheader}
 +
++# please don't use python 2, it is deprecated!
++# use python 3 instead
 +
 +def main():
-+	
-+	return 0
++	print "give me a bottle of rum!"
 +
 +if __name__ == '__main__':
 +	main()
 +
-Index: geany/data/templates/files/ruby.rb
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/ruby.rb
-@@ -0,0 +1,10 @@
++++ geany-1.35/data/templates/files/python3.py
+@@ -0,0 +1,11 @@
++#!/usr/bin/env python3
++# -*- coding: utf-8 -*-
++#
++{fileheader}
++
++def main(args):
++    print("give me a bottle of rum!")
++
++if __name__ == '__main__':
++    import sys
++    sys.exit(main(sys.argv))
+--- /dev/null
++++ geany-1.35/data/templates/files/ruby.rb
+@@ -0,0 +1,12 @@
++#!/usr/bin/env ruby
++
 +{fileheader}
 +
 +class StdClass
@@ -4369,11 +4692,59 @@ Index: geany/data/templates/files/ruby.rb
 +
 +x = StdClass.new
 +
-Index: geany/data/templates/files/style.css
-===================================================================
 --- /dev/null
-+++ geany/data/templates/files/style.css
++++ geany-1.35/data/templates/files/web.css
 @@ -0,0 +1,3 @@
 +.class {
 +	color: #00ff00;
 +}
+--- /dev/null
++++ geany-1.35/data/templates/files/web.html
+@@ -0,0 +1,16 @@
++{fileheader}
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
++	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
++
++<head>
++	<title>{untitled}</title>
++	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
++	<meta name="generator" content="{geanyversion}" />
++</head>
++
++<body>
++	
++</body>
++
++</html>
+--- /dev/null
++++ geany-1.35/data/templates/files/web.php
+@@ -0,0 +1,18 @@
++<?php
++{fileheader}
++?>
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
++	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
++
++<head>
++	<title>{untitled}</title>
++	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
++	<meta name="generator" content="{geanyversion}" />
++</head>
++
++<body>
++	
++</body>
++
++</html>
+--- geany-1.35.orig/data/templates/gpl
++++ geany-1.35/data/templates/gpl
+@@ -1,6 +1,6 @@
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+-the Free Software Foundation; either version 2 of the License, or
++the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,

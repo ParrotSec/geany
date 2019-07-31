@@ -1,9 +1,7 @@
 /*
  *      highlightingmappings.h - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
- *      Copyright 2011-2012 Colomban Wendling <ban(at)herbesfolles(dot)org>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -478,14 +476,18 @@ static const HLKeyword highlighting_keywords_D[] =
 #define highlighting_lexer_DIFF			SCLEX_DIFF
 static const HLStyle highlighting_styles_DIFF[] =
 {
-	{ SCE_DIFF_DEFAULT,		"default",	FALSE },
-	{ SCE_DIFF_COMMENT,		"comment",	FALSE },
-	{ SCE_DIFF_COMMAND,		"command",	FALSE },
-	{ SCE_DIFF_HEADER,		"header",	FALSE },
-	{ SCE_DIFF_POSITION,	"position",	FALSE },
-	{ SCE_DIFF_DELETED,		"deleted",	FALSE },
-	{ SCE_DIFF_ADDED,		"added",	FALSE },
-	{ SCE_DIFF_CHANGED,		"changed",	FALSE }
+	{ SCE_DIFF_DEFAULT,					"default",				FALSE },
+	{ SCE_DIFF_COMMENT,					"comment",				FALSE },
+	{ SCE_DIFF_COMMAND,					"command",				FALSE },
+	{ SCE_DIFF_HEADER,					"header",				FALSE },
+	{ SCE_DIFF_POSITION,				"position",				FALSE },
+	{ SCE_DIFF_DELETED,					"deleted",				FALSE },
+	{ SCE_DIFF_ADDED,					"added",				FALSE },
+	{ SCE_DIFF_CHANGED,					"changed",				FALSE },
+	{ SCE_DIFF_PATCH_ADD,				"patch_add",			FALSE },
+	{ SCE_DIFF_PATCH_DELETE,			"patch_delete",			FALSE },
+	{ SCE_DIFF_REMOVED_PATCH_ADD,		"removed_patch_add",	FALSE },
+	{ SCE_DIFF_REMOVED_PATCH_DELETE,	"removed_patch_delete",	FALSE }
 };
 #define highlighting_keywords_DIFF		EMPTY_KEYWORDS
 #define highlighting_properties_DIFF	EMPTY_PROPERTIES

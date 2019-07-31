@@ -208,7 +208,7 @@ static bool NewLine = true;
 static unsigned int contextual_fake_count = 0;
 
 /* indexed by tagType */
-static kindOption FortranKinds [TAG_COUNT] = {
+static kindDefinition FortranKinds [TAG_COUNT] = {
 	{ true,  'b', "blockData",  "block data"},
 	{ true,  'c', "common",     "common blocks"},
 	{ true,  'e', "entry",      "entry points"},
@@ -475,7 +475,7 @@ static bool includeTag (const tagType type)
 	Assert (type > TAG_UNDEFINED && type < TAG_COUNT);
 	include = FortranKinds [(int) type].enabled;
 	if (include && isFileScope (type))
-		include = Option.include.fileScope;
+		include = isXtagEnabled(XTAG_FILE_SCOPE);
 	return include;
 }
 
@@ -487,22 +487,22 @@ static void makeFortranTag (tokenInfo *const token, tagType tag)
 		const char *const name = vStringValue (token->string);
 		tagEntryInfo e;
 
-		initTagEntry (&e, name, &(FortranKinds [token->tag]));
+		initTagEntry (&e, name, token->tag);
 
 		if (token->tag == TAG_COMMON_BLOCK)
-			e.lineNumberEntry = (bool) (Option.locate != EX_PATTERN);
+			e.lineNumberEntry = canUseLineNumberAsLocator();
 
 		e.lineNumber	= token->lineNumber;
 		e.filePosition	= token->filePosition;
 		e.isFileScope	= isFileScope (token->tag);
-		e.truncateLine	= (bool) (token->tag != TAG_LABEL);
+		e.truncateLineAfterTag	= (bool) (token->tag != TAG_LABEL);
 
 		if (ancestorCount () > 0)
 		{
 			const tokenInfo* const scope = ancestorScope ();
 			if (scope != NULL)
 			{
-				e.extensionFields.scopeKind = &(FortranKinds [scope->tag]);
+				e.extensionFields.scopeKindIndex = scope->tag;
 				e.extensionFields.scopeName = vStringValue (scope->string);
 			}
 		}
@@ -2268,11 +2268,11 @@ static void parseProgramUnit (tokenInfo *const token)
 	} while (true);
 }
 
-static bool findFortranTags (const unsigned int passCount)
+static rescanReason findFortranTags (const unsigned int passCount)
 {
 	tokenInfo *token;
 	exception_t exception;
-	bool retry;
+	rescanReason rescan;
 
 	Assert (passCount < 3);
 	Parent = newToken ();
@@ -2283,23 +2283,23 @@ static bool findFortranTags (const unsigned int passCount)
 	NewLine = true;
 	exception = (exception_t) setjmp (Exception);
 	if (exception == ExceptionEOF)
-		retry = false;
+		rescan = RESCAN_NONE;
 	else if (exception == ExceptionFixedFormat  &&  ! FreeSourceForm)
 	{
 		verbose ("%s: not fixed source form; retry as free source form\n",
 				getInputFileName ());
-		retry = true;
+		rescan = RESCAN_FAILED;
 	}
 	else
 	{
 		parseProgramUnit (token);
-		retry = false;
+		rescan = RESCAN_NONE;
 	}
 	ancestorClear ();
 	deleteToken (token);
 	deleteToken (Parent);
 
-	return retry;
+	return rescan;
 }
 
 static void initializeFortran (const langType language)
@@ -2322,7 +2322,7 @@ extern parserDefinition* FortranParser (void)
 	NULL
 	};
 	parserDefinition* def = parserNew ("Fortran");
-	def->kinds      = FortranKinds;
+	def->kindTable  = FortranKinds;
 	def->kindCount  = ARRAY_SIZE (FortranKinds);
 	def->extensions = extensions;
 	def->parser2    = findFortranTags;
@@ -2342,7 +2342,7 @@ extern parserDefinition* F77Parser (void)
 	NULL
 	};
 	parserDefinition* def = parserNew ("F77");
-	def->kinds      = FortranKinds;
+	def->kindTable  = FortranKinds;
 	def->kindCount  = ARRAY_SIZE (FortranKinds);
 	def->extensions = extensions;
 	def->parser2    = findFortranTags;

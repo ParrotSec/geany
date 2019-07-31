@@ -84,6 +84,7 @@
 // ScintillaGTK.h and stuff it needs
 #include "Platform.h"
 
+#include "ILoader.h"
 #include "ILexer.h"
 #include "Scintilla.h"
 #include "ScintillaWidget.h"
@@ -104,7 +105,6 @@
 #include "CallTip.h"
 #include "KeyMap.h"
 #include "Indicator.h"
-#include "XPM.h"
 #include "LineMarker.h"
 #include "Style.h"
 #include "ViewStyle.h"
@@ -114,7 +114,6 @@
 #include "Document.h"
 #include "CaseConvert.h"
 #include "UniConversion.h"
-#include "UnicodeFromUTF8.h"
 #include "Selection.h"
 #include "PositionCache.h"
 #include "EditModel.h"
@@ -127,9 +126,7 @@
 #include "ScintillaGTK.h"
 #include "ScintillaGTKAccessible.h"
 
-#ifdef SCI_NAMESPACE
 using namespace Scintilla;
-#endif
 
 struct ScintillaObjectAccessiblePrivate {
 	ScintillaGTKAccessible *pscin;
@@ -159,8 +156,8 @@ ScintillaGTKAccessible *ScintillaGTKAccessible::FromAccessible(GtkAccessible *ac
 ScintillaGTKAccessible::ScintillaGTKAccessible(GtkAccessible *accessible_, GtkWidget *widget_) :
 		accessible(accessible_),
 		sci(ScintillaGTK::FromWidget(widget_)),
-		deletionLengthChar(0),
 		old_pos(-1) {
+	SetAccessibility(true);
 	g_signal_connect(widget_, "sci-notify", G_CALLBACK(SciNotify), this);
 }
 
@@ -764,7 +761,7 @@ void ScintillaGTKAccessible::PasteText(int charPosition) {
 		}
 
 		static void TextReceivedCallback(GtkClipboard *clipboard, const gchar *text, gpointer data) {
-			Helper *helper = reinterpret_cast<Helper*>(data);
+			Helper *helper = static_cast<Helper*>(data);
 			try {
 				if (helper->scia != 0) {
 					helper->TextReceived(clipboard, text);
@@ -864,10 +861,12 @@ void ScintillaGTKAccessible::NotifyReadOnly() {
 #endif
 }
 
-void ScintillaGTKAccessible::SetAccessibility() {
+void ScintillaGTKAccessible::SetAccessibility(bool enabled) {
 	// Called by ScintillaGTK when application has enabled or disabled accessibility
-	character_offsets.resize(0);
-	character_offsets.push_back(0);
+	if (enabled)
+		sci->pdoc->AllocateLineCharacterIndex(SC_LINECHARACTERINDEX_UTF32);
+	else
+		sci->pdoc->ReleaseLineCharacterIndex(SC_LINECHARACTERINDEX_UTF32);
 }
 
 void ScintillaGTKAccessible::Notify(GtkWidget *, gint, SCNotification *nt) {
@@ -875,13 +874,6 @@ void ScintillaGTKAccessible::Notify(GtkWidget *, gint, SCNotification *nt) {
 		return;
 	switch (nt->nmhdr.code) {
 		case SCN_MODIFIED: {
-			if (nt->modificationType & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)) {
-				// invalidate character offset cache if applicable
-				const Sci::Line line = sci->pdoc->LineFromPosition(nt->position);
-				if (character_offsets.size() > static_cast<size_t>(line + 1)) {
-					character_offsets.resize(line + 1);
-				}
-			}
 			if (nt->modificationType & SC_MOD_INSERTTEXT) {
 				int startChar = CharacterOffsetFromByteOffset(nt->position);
 				int lengthChar = sci->pdoc->CountCharacters(nt->position, nt->position + nt->length);
@@ -889,14 +881,11 @@ void ScintillaGTKAccessible::Notify(GtkWidget *, gint, SCNotification *nt) {
 				UpdateCursor();
 			}
 			if (nt->modificationType & SC_MOD_BEFOREDELETE) {
-				// We cannot compute the deletion length in DELETETEXT as it requires accessing the
-				// buffer, so that the character are still present.  So, we cache the value here,
-				// and use it in DELETETEXT that fires quickly after.
-				deletionLengthChar = sci->pdoc->CountCharacters(nt->position, nt->position + nt->length);
+				int startChar = CharacterOffsetFromByteOffset(nt->position);
+				int lengthChar = sci->pdoc->CountCharacters(nt->position, nt->position + nt->length);
+				g_signal_emit_by_name(accessible, "text-changed::delete", startChar, lengthChar);
 			}
 			if (nt->modificationType & SC_MOD_DELETETEXT) {
-				int startChar = CharacterOffsetFromByteOffset(nt->position);
-				g_signal_emit_by_name(accessible, "text-changed::delete", startChar, deletionLengthChar);
 				UpdateCursor();
 			}
 			if (nt->modificationType & SC_MOD_CHANGESTYLE) {
@@ -1131,7 +1120,7 @@ AtkObject *ScintillaGTKAccessible::WidgetGetAccessibleImpl(GtkWidget *widget, At
 	if (parent_atk_type == 0) {
 		AtkObject *parent_obj = GTK_WIDGET_CLASS(widget_parent_class)->get_accessible(widget);
 		if (parent_obj) {
-			GType parent_atk_type = G_OBJECT_TYPE(parent_obj);
+			parent_atk_type = G_OBJECT_TYPE(parent_obj);
 
 			// Figure out whether accessibility is enabled by looking at the type of the accessible
 			// object which would be created for the parent type of ScintillaObject.

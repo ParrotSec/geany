@@ -1,8 +1,7 @@
 /*
  *      document.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -704,7 +703,8 @@ static gboolean remove_page(guint page_num)
 
 	g_return_val_if_fail(doc != NULL, FALSE);
 
-	if (doc->changed && ! dialogs_show_unsaved_file(doc))
+	/* if we're closing all, document_account_for_unsaved() has been called already, no need to ask again. */
+	if (! main_status.closing_all && doc->changed && ! dialogs_show_unsaved_file(doc))
 		return FALSE;
 
 	/* tell any plugins that the document is about to be closed */
@@ -1492,7 +1492,7 @@ GeanyDocument *document_open_file_full(GeanyDocument *doc, const gchar *filename
 			/* For translators: this is the status window message for opening a file. %d is the number
 			 * of the newly opened file, %s indicates whether the file is opened read-only
 			 * (it is replaced with the string ", read-only"). */
-			msgwin_status_add(_("File %s opened(%d%s)."),
+			msgwin_status_add(_("File %s opened (%d%s)."),
 				display_filename, gtk_notebook_get_n_pages(GTK_NOTEBOOK(main_widgets.notebook)),
 				(readonly) ? _(", read-only") : "");
 		}
@@ -3368,12 +3368,10 @@ GeanyDocument *document_clone(GeanyDocument *old_doc)
 }
 
 
-/* @note If successful, this should always be followed up with a call to
- * document_close_all().
- * @return TRUE if all files were saved or had their changes discarded. */
+/* @return TRUE if all files were saved or had their changes discarded. */
 gboolean document_account_for_unsaved(void)
 {
-	guint i, p, page_count;
+	guint p, page_count;
 
 	page_count = gtk_notebook_get_n_pages(GTK_NOTEBOOK(main_widgets.notebook));
 	/* iterate over documents in tabs order */
@@ -3387,27 +3385,15 @@ gboolean document_account_for_unsaved(void)
 				return FALSE;
 		}
 	}
-	/* all documents should now be accounted for, so ignore any changes */
-	foreach_document (i)
-	{
-		documents[i]->changed = FALSE;
-	}
+
 	return TRUE;
 }
 
 
 static void force_close_all(void)
 {
-	guint i, len = documents_array->len;
+	guint i;
 
-	/* check all documents have been accounted for */
-	for (i = 0; i < len; i++)
-	{
-		if (documents[i]->is_valid)
-		{
-			g_return_if_fail(!documents[i]->changed);
-		}
-	}
 	main_status.closing_all = TRUE;
 
 	foreach_document(i)
@@ -3472,7 +3458,7 @@ static GtkWidget* document_show_message(GeanyDocument *doc, GtkMessageType msgty
 	text = g_strdup_vprintf(format, args);
 	va_end(args);
 
-	markup = g_strdup_printf("<span size=\"larger\">%s</span>", text);
+	markup = g_markup_printf_escaped("<span size=\"larger\">%s</span>", text);
 	g_free(text);
 
 	info_widget = gtk_info_bar_new();

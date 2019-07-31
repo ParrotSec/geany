@@ -1,8 +1,7 @@
 /*
  *      export.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2007-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2007-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2007 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -374,10 +373,9 @@ static void write_latex_file(GeanyDocument *doc, const gchar *filename,
 	GString *body;
 	GString *cmds;
 	GString *latex;
-	gint style_max = pow(2, scintilla_send_message(sci, SCI_GETSTYLEBITS, 0, 0));
 
 	/* first read all styles from Scintilla */
-	for (i = 0; i < style_max; i++)
+	for (i = 0; i < STYLE_MAX; i++)
 	{
 		styles[i][FORE] = scintilla_send_message(sci, SCI_STYLEGETFORE, i, 0);
 		styles[i][BACK] = scintilla_send_message(sci, SCI_STYLEGETBACK, i, 0);
@@ -517,7 +515,7 @@ static void write_latex_file(GeanyDocument *doc, const gchar *filename,
 
 	/* write used styles in the header */
 	cmds = g_string_new("");
-	for (i = 0; i < style_max; i++)
+	for (i = 0; i < STYLE_MAX; i++)
 	{
 		if (styles[i][USED])
 		{
@@ -578,10 +576,9 @@ static void write_html_file(GeanyDocument *doc, const gchar *filename,
 	GString *body;
 	GString *css;
 	GString *html;
-	gint style_max = pow(2, scintilla_send_message(sci, SCI_GETSTYLEBITS, 0, 0));
 
 	/* first read all styles from Scintilla */
-	for (i = 0; i < style_max; i++)
+	for (i = 0; i < STYLE_MAX; i++)
 	{
 		styles[i][FORE] = ROTATE_RGB(scintilla_send_message(sci, SCI_STYLEGETFORE, i, 0));
 		styles[i][BACK] = ROTATE_RGB(scintilla_send_message(sci, SCI_STYLEGETBACK, i, 0));
@@ -707,7 +704,7 @@ static void write_html_file(GeanyDocument *doc, const gchar *filename,
 	"\tbody\n\t{\n\t\tfont-family: %s, monospace;\n\t\tfont-size: %dpt;\n\t}\n",
 				font_name, font_size);
 
-	for (i = 0; i < style_max; i++)
+	for (i = 0; i < STYLE_MAX; i++)
 	{
 		if (styles[i][USED])
 		{

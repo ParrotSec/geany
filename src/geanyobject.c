@@ -1,8 +1,7 @@
 /*
  *      geanyobject.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2007-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2007-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2007 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -229,6 +228,15 @@ static void create_signals(GObjectClass *g_object_class)
 		0, NULL, NULL, g_cclosure_marshal_VOID__BOXED,
 		G_TYPE_NONE, 1,
 		G_TYPE_KEY_FILE);
+
+	/* Key press signal */
+	geany_object_signals[GCB_KEY_PRESS_NOTIFY] = g_signal_new (
+		"key-press",
+		G_OBJECT_CLASS_TYPE (g_object_class),
+		G_SIGNAL_RUN_LAST,
+		0, boolean_handled_accumulator, NULL, NULL,
+		G_TYPE_BOOLEAN, 1,
+		GDK_TYPE_EVENT | G_SIGNAL_TYPE_STATIC_SCOPE);
 }
 
 

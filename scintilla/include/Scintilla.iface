@@ -639,6 +639,8 @@ val INDIC_FULLBOX=16
 val INDIC_TEXTFORE=17
 val INDIC_POINT=18
 val INDIC_POINTCHARACTER=19
+val INDIC_GRADIENT=20
+val INDIC_GRADIENTCENTRE=21
 val INDIC_IME=32
 val INDIC_IME_MAX=35
 val INDIC_MAX=35
@@ -701,14 +703,6 @@ set void SetWhitespaceSize=2086(int size,)
 
 # Get the size of the dots used to mark space characters.
 get int GetWhitespaceSize=2087(,)
-
-# Divide each styling byte into lexical class bits (default: 5) and indicator
-# bits (default: 3). If a lexer requires more than 32 lexical states, then this
-# is used to expand the possible states.
-set void SetStyleBits=2090(int bits,)
-
-# Retrieve number of bits in style bytes used to hold the lexical state.
-get int GetStyleBits=2091(,)
 
 # Used to hold extra styling information for each line.
 set void SetLineState=2092(int line, int state)
@@ -868,6 +862,9 @@ get int GetColumn=2129(position pos,)
 # Count characters between two positions.
 fun int CountCharacters=2633(position start, position end)
 
+# Count code units between two positions.
+fun int CountCodeUnits=2715(position start, position end)
+
 # Show or hide the horizontal scroll bar.
 set void SetHScrollBar=2130(bool visible,)
 # Is the horizontal scroll bar visible?
@@ -930,6 +927,7 @@ get int GetPrintMagnification=2147(,)
 
 enu PrintOption=SC_PRINT_
 # PrintColourMode - use same colours as screen.
+# with the exception of line number margins, which use a white background
 val SC_PRINT_NORMAL=0
 # PrintColourMode - invert the light value of each style for printing.
 val SC_PRINT_INVERTLIGHT=1
@@ -939,6 +937,8 @@ val SC_PRINT_BLACKONWHITE=2
 val SC_PRINT_COLOURONWHITE=3
 # PrintColourMode - only the default-background is forced to be white for printing.
 val SC_PRINT_COLOURONWHITEDEFAULTBG=4
+# PrintColourMode - use same colours as screen, including line number margins.
+val SC_PRINT_SCREENCOLOURS=5
 
 # Modify colours when printing for clearer printed text.
 set void SetPrintColourMode=2148(int mode,)
@@ -997,7 +997,7 @@ fun int GetSelText=2161(, stringresult text)
 # Return the length of the text.
 fun int GetTextRange=2162(, textrange tr)
 
-# Draw the selection in normal style or with selection highlighted.
+# Draw the selection either highlighted or in normal (non-highlighted) style.
 fun void HideSelection=2163(bool hide,)
 
 # Retrieve the x value of the point in the window where a position is displayed.
@@ -1362,6 +1362,7 @@ enu WrapIndentMode=SC_WRAPINDENT_
 val SC_WRAPINDENT_FIXED=0
 val SC_WRAPINDENT_SAME=1
 val SC_WRAPINDENT_INDENT=2
+val SC_WRAPINDENT_DEEPINDENT=3
 
 # Sets how wrapped sublines are placed. Default is fixed.
 set void SetWrapIndentMode=2472(int wrapIndentMode,)
@@ -1786,16 +1787,30 @@ set void SetZoom=2373(int zoomInPoints,)
 # Retrieve the zoom level.
 get int GetZoom=2374(,)
 
+enu DocumentOption=SC_DOCUMENTOPTION_
+val SC_DOCUMENTOPTION_DEFAULT=0
+val SC_DOCUMENTOPTION_STYLES_NONE=0x1
+val SC_DOCUMENTOPTION_TEXT_LARGE=0x100
+
 # Create a new document object.
 # Starts with reference count of 1 and not selected into editor.
-fun int CreateDocument=2375(,)
+fun int CreateDocument=2375(int bytes, int documentOptions)
 # Extend life of document.
 fun void AddRefDocument=2376(, int doc)
 # Release a reference to the document, deleting document if it fades to black.
 fun void ReleaseDocument=2377(, int doc)
 
+# Get which document options are set.
+get int GetDocumentOptions=2379(,)
+
 # Get which document modification events are sent to the container.
 get int GetModEventMask=2378(,)
+
+# Set whether command events are sent to the container.
+set void SetCommandEvents=2717(bool commandEvents,)
+
+# Get whether command events are sent to the container.
+get bool GetCommandEvents=2718(,)
 
 # Change internal focus flag.
 set void SetFocus=2380(bool focus,)
@@ -1960,6 +1975,11 @@ fun position PositionAfter=2418(position pos,)
 # of characters. Returned value is always between 0 and last position in document.
 fun position PositionRelative=2670(position pos, int relative)
 
+# Given a valid document position, return a position that differs in a number
+# of UTF-16 code units. Returned value is always between 0 and last position in document.
+# The result may point half way (2 bytes) inside a non-BMP character.
+fun position PositionRelativeCodeUnits=2716(position pos, int relative)
+
 # Copy a range of text to the clipboard. Positions are clipped into the document.
 fun void CopyRange=2419(position start, position end)
 
@@ -1978,6 +1998,9 @@ set void SetSelectionMode=2422(int selectionMode,)
 
 # Get the mode of the current selection.
 get int GetSelectionMode=2423(,)
+
+# Get whether or not regular caret moves will extend or reduce the selection.
+get bool GetMoveExtendsSelection=2706(,)
 
 # Retrieve the position of the start of the selection at the given line (INVALID_POSITION if no selection on this line).
 fun position GetLineSelStartPosition=2424(int line,)
@@ -2552,7 +2575,7 @@ set void SetTechnology=2630(int technology,)
 get int GetTechnology=2631(,)
 
 # Create an ILoader*.
-fun int CreateLoader=2632(int bytes,)
+fun int CreateLoader=2632(int bytes, int documentOptions)
 
 # On OS X, show a find indicator.
 fun void FindIndicatorShow=2640(position start, position end)
@@ -2645,9 +2668,6 @@ get int GetPropertyExpanded=4009(string key, stringresult value)
 # interpreted as an int AFTER any "$()" variable replacement.
 get int GetPropertyInt=4010(string key, int defaultValue)
 
-# Retrieve the number of bits the current lexer needs for styling.
-get int GetStyleBitsNeeded=4011(,)
-
 # Retrieve the name of the lexer.
 # Return the length of the text.
 # Result is NUL-terminated.
@@ -2708,6 +2728,21 @@ get int DistanceToSecondaryStyles=4025(,)
 # Get the set of base styles that can be extended with sub styles
 # Result is NUL-terminated.
 get int GetSubStyleBases=4026(, stringresult styles)
+
+# Retrieve the number of named styles for the lexer.
+get int GetNamedStyles=4029(,)
+
+# Retrieve the name of a style.
+# Result is NUL-terminated.
+fun int NameOfStyle=4030(int style, stringresult name)
+
+# Retrieve a ' ' separated list of style tags like "literal quoted string".
+# Result is NUL-terminated.
+fun int TagsOfStyle=4031(int style, stringresult tags)
+
+# Retrieve a description of a style.
+# Result is NUL-terminated.
+fun int DescriptionOfStyle=4032(int style, stringresult description)
 
 # Notifications
 # Type of modification and the action which caused the modification.
@@ -2917,6 +2952,11 @@ val SCLEX_TEHEX=119
 val SCLEX_JSON=120
 val SCLEX_EDIFACT=121
 val SCLEX_INDENT=122
+val SCLEX_MAXIMA=123
+val SCLEX_STATA=124
+val SCLEX_SAS=125
+val SCLEX_NIM=126
+val SCLEX_LPEG=999
 
 # When a lexer specifies its language as SCLEX_AUTOMATIC it receives a
 # value assigned in sequence from SCLEX_AUTOMATIC+1.
@@ -2944,7 +2984,11 @@ val SCE_P_FSTRING=16
 val SCE_P_FCHARACTER=17
 val SCE_P_FTRIPLE=18
 val SCE_P_FTRIPLEDOUBLE=19
-# Lexical states for SCLEX_CPP, SCLEX_BULLANT, SCLEX_COBOL, SCLEX_TACL, SCLEX_TAL
+# Lexical states for SCLEX_CPP
+# Lexical states for SCLEX_BULLANT
+# Lexical states for SCLEX_COBOL
+# Lexical states for SCLEX_TACL
+# Lexical states for SCLEX_TAL
 lex Cpp=SCLEX_CPP SCE_C_
 lex BullAnt=SCLEX_BULLANT SCE_C_
 lex COBOL=SCLEX_COBOL SCE_C_
@@ -3397,6 +3441,10 @@ val SCE_DIFF_POSITION=4
 val SCE_DIFF_DELETED=5
 val SCE_DIFF_ADDED=6
 val SCE_DIFF_CHANGED=7
+val SCE_DIFF_PATCH_ADD=8
+val SCE_DIFF_PATCH_DELETE=9
+val SCE_DIFF_REMOVED_PATCH_ADD=10
+val SCE_DIFF_REMOVED_PATCH_DELETE=11
 # Lexical states for SCLEX_CONF (Apache Configuration Files Lexer)
 lex Conf=SCLEX_CONF SCE_CONF_
 val SCE_CONF_DEFAULT=0
@@ -3532,6 +3580,16 @@ val SCE_MATLAB_STRING=5
 val SCE_MATLAB_OPERATOR=6
 val SCE_MATLAB_IDENTIFIER=7
 val SCE_MATLAB_DOUBLEQUOTESTRING=8
+# Lexical states for SCLEX_MAXIMA
+lex Maxima=SCLEX_MAXIMA SCE_MAXIMA_
+val SCE_MAXIMA_OPERATOR=0
+val SCE_MAXIMA_COMMANDENDING=1
+val SCE_MAXIMA_COMMENT=2
+val SCE_MAXIMA_NUMBER=3
+val SCE_MAXIMA_STRING=4
+val SCE_MAXIMA_COMMAND=5
+val SCE_MAXIMA_VARIABLE=6
+val SCE_MAXIMA_UNKNOWN=7
 # Lexical states for SCLEX_SCRIPTOL
 lex Sol=SCLEX_SCRIPTOL SCE_SCRIPTOL_
 val SCE_SCRIPTOL_DEFAULT=0
@@ -4820,6 +4878,57 @@ val SCE_EDI_SEP_RELEASE=5
 val SCE_EDI_UNA=6
 val SCE_EDI_UNH=7
 val SCE_EDI_BADSEGMENT=8
+# Lexical states for SCLEX_STATA
+lex STATA=SCLEX_STATA SCE_STATA_
+val SCE_STATA_DEFAULT=0
+val SCE_STATA_COMMENT=1
+val SCE_STATA_COMMENTLINE=2
+val SCE_STATA_COMMENTBLOCK=3
+val SCE_STATA_NUMBER=4
+val SCE_STATA_OPERATOR=5
+val SCE_STATA_IDENTIFIER=6
+val SCE_STATA_STRING=7
+val SCE_STATA_TYPE=8
+val SCE_STATA_WORD=9
+val SCE_STATA_GLOBAL_MACRO=10
+val SCE_STATA_MACRO=11
+# Lexical states for SCLEX_SAS
+lex SAS=SCLEX_SAS SCE_SAS_
+val SCE_SAS_DEFAULT=0
+val SCE_SAS_COMMENT=1
+val SCE_SAS_COMMENTLINE=2
+val SCE_SAS_COMMENTBLOCK=3
+val SCE_SAS_NUMBER=4
+val SCE_SAS_OPERATOR=5
+val SCE_SAS_IDENTIFIER=6
+val SCE_SAS_STRING=7
+val SCE_SAS_TYPE=8
+val SCE_SAS_WORD=9
+val SCE_SAS_GLOBAL_MACRO=10
+val SCE_SAS_MACRO=11
+val SCE_SAS_MACRO_KEYWORD=12
+val SCE_SAS_BLOCK_KEYWORD=13
+val SCE_SAS_MACRO_FUNCTION=14
+val SCE_SAS_STATEMENT=15
+# Lexical states for SCLEX_NIM 
+lex Nim=SCLEX_NIM SCE_NIM_
+val SCE_NIM_DEFAULT=0
+val SCE_NIM_COMMENT=1
+val SCE_NIM_COMMENTDOC=2
+val SCE_NIM_COMMENTLINE=3
+val SCE_NIM_COMMENTLINEDOC=4
+val SCE_NIM_NUMBER=5
+val SCE_NIM_STRING=6
+val SCE_NIM_CHARACTER=7
+val SCE_NIM_WORD=8
+val SCE_NIM_TRIPLE=9
+val SCE_NIM_TRIPLEDOUBLE=10
+val SCE_NIM_BACKTICKS=11
+val SCE_NIM_FUNCNAME=12
+val SCE_NIM_STRINGEOL=13
+val SCE_NIM_NUMERROR=14
+val SCE_NIM_OPERATOR=15
+val SCE_NIM_IDENTIFIER=16
 
 # Events
 
@@ -4855,12 +4964,42 @@ evt void FocusIn=2028(void)
 evt void FocusOut=2029(void)
 evt void AutoCCompleted=2030(string text, int position, int ch, CompletionMethods listCompletionMethod)
 evt void MarginRightClick=2031(int modifiers, int position, int margin)
-
-# There are no provisional APIs currently, but some arguments to SCI_SETTECHNOLOGY are provisional.
+evt void AutoCSelectionChange=2032(int listType, string text, int position)
 
 cat Provisional
 
+enu LineCharacterIndexType=SC_LINECHARACTERINDEX_
+val SC_LINECHARACTERINDEX_NONE=0
+val SC_LINECHARACTERINDEX_UTF32=1
+val SC_LINECHARACTERINDEX_UTF16=2
+
+# Retrieve line character index state.
+get int GetLineCharacterIndex=2710(,)
+
+# Request line character index be created or its use count increased.
+fun void AllocateLineCharacterIndex=2711(int lineCharacterIndex,)
+
+# Decrease use count of line character index and remove if 0.
+fun void ReleaseLineCharacterIndex=2712(int lineCharacterIndex,)
+
+# Retrieve the document line containing a position measured in index units.
+fun int LineFromIndexPosition=2713(position pos, int lineCharacterIndex)
+
+# Retrieve the position measured in index units at the start of a document line.
+fun position IndexPositionFromLine=2714(int line, int lineCharacterIndex)
+
 cat Deprecated
+
+# Divide each styling byte into lexical class bits (default: 5) and indicator
+# bits (default: 3). If a lexer requires more than 32 lexical states, then this
+# is used to expand the possible states.
+set void SetStyleBits=2090(int bits,)
+
+# Retrieve number of bits in style bytes used to hold the lexical state.
+get int GetStyleBits=2091(,)
+
+# Retrieve the number of bits the current lexer needs for styling.
+get int GetStyleBitsNeeded=4011(,)
 
 # Deprecated in 3.5.5
 

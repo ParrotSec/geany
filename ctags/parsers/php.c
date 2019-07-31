@@ -113,7 +113,7 @@ typedef enum {
 	COUNT_KIND
 } phpKind;
 
-static kindOption PhpKinds[COUNT_KIND] = {
+static kindDefinition PhpKinds[COUNT_KIND] = {
 	{ true, 'c', "class",		"classes" },
 	{ true, 'd', "define",		"constant definitions" },
 	{ true, 'f', "function",	"functions" },
@@ -280,7 +280,7 @@ static void initPhpEntry (tagEntryInfo *const e, const tokenInfo *const token,
 		parentKind = K_NAMESPACE;
 	}
 
-	initTagEntry (e, vStringValue (token->string), &(PhpKinds[kind]));
+	initTagEntry (e, vStringValue (token->string), kind);
 
 	e->lineNumber	= token->lineNumber;
 	e->filePosition	= token->filePosition;
@@ -298,7 +298,7 @@ static void initPhpEntry (tagEntryInfo *const e, const tokenInfo *const token,
 	{
 		Assert (parentKind >= 0);
 
-		e->extensionFields.scopeKind = &(PhpKinds[parentKind]);
+		e->extensionFields.scopeKindIndex = parentKind;
 		e->extensionFields.scopeName = vStringValue (fullScope);
 	}
 }
@@ -321,7 +321,7 @@ static void makeNamespacePhpTag (const tokenInfo *const token, const vString *co
 	{
 		tagEntryInfo e;
 
-		initTagEntry (&e, vStringValue (name), &(PhpKinds[K_NAMESPACE]));
+		initTagEntry (&e, vStringValue (name), K_NAMESPACE);
 
 		e.lineNumber	= token->lineNumber;
 		e.filePosition	= token->filePosition;
@@ -940,7 +940,7 @@ getNextChar:
 			else
 			{
 				parseIdentifier (token->string, c);
-				token->keyword = analyzeToken (token->string, getSourceLanguage ());
+				token->keyword = analyzeToken (token->string, getInputLanguage ());
 				if (token->keyword == KEYWORD_NONE)
 					token->type = TOKEN_IDENTIFIER;
 				else
@@ -1145,7 +1145,7 @@ static bool parseFunction (tokenInfo *const token, const tokenInfo *name)
 	}
 
 	/* if parsing Zephir, skip function return type hint */
-	if (getSourceLanguage () == Lang_zephir && token->type == TOKEN_OPERATOR)
+	if (getInputLanguage () == Lang_zephir && token->type == TOKEN_OPERATOR)
 	{
 		do
 			readToken (token);
@@ -1453,7 +1453,7 @@ extern parserDefinition* PhpParser (void)
 {
 	static const char *const extensions [] = { "php", "php3", "php4", "php5", "phtml", NULL };
 	parserDefinition* def = parserNew ("PHP");
-	def->kinds      = PhpKinds;
+	def->kindTable  = PhpKinds;
 	def->kindCount  = ARRAY_SIZE (PhpKinds);
 	def->extensions = extensions;
 	def->parser     = findPhpTags;
@@ -1467,7 +1467,7 @@ extern parserDefinition* ZephirParser (void)
 {
 	static const char *const extensions [] = { "zep", NULL };
 	parserDefinition* def = parserNew ("Zephir");
-	def->kinds      = PhpKinds;
+	def->kindTable  = PhpKinds;
 	def->kindCount  = ARRAY_SIZE (PhpKinds);
 	def->extensions = extensions;
 	def->parser     = findZephirTags;

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-#  Copyright 2015-2016 Thomas Martitz <kugel@rockbox.org>
+#  Copyright 2015 The Geany contributors
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -75,11 +75,14 @@ class AtDoc(object):
                       "geany:closure",
                       "geany:destroy"):
             self.annot.append(type.split(":")[1])
-        elif type in ("geany:transfer",
+        elif type in ("geany:array",
+                      "geany:transfer",
                       "geany:element-type",
                       "geany:scope"):
             type = type.split(":")[1]
-            self.annot.append("%s %s" % (type, str))
+            if len(str):
+                str = " " + str
+            self.annot.append("%s%s" % (type, str))
         elif (type == "see"):
             return "See " + str
         elif type in ("a", "c") and str in ("NULL", "TRUE", "FALSE"):

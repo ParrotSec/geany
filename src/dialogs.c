@@ -1,8 +1,7 @@
 /*
  *      dialogs.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -492,6 +491,7 @@ static gboolean handle_save_as(const gchar *utf8_filename, gboolean rename_file)
 	GeanyDocument *doc = document_get_current();
 	gboolean success = FALSE;
 
+	g_return_val_if_fail(doc != NULL, FALSE);
 	g_return_val_if_fail(!EMPTY(utf8_filename), FALSE);
 
 	if (doc->file_name != NULL)

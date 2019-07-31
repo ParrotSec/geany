@@ -1,8 +1,7 @@
 /*
  *      keyfile.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2005-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2005 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -832,7 +831,9 @@ static void load_dialog_prefs(GKeyFile *config)
 		"none");
 	if (tmp_string)
 	{
-		const GeanyEncoding *enc = encodings_get_from_charset(tmp_string);
+		const GeanyEncoding *enc = NULL;
+		if (strcmp(tmp_string, "none") != 0)
+			enc = encodings_get_from_charset(tmp_string);
 		if (enc != NULL)
 			file_prefs.default_open_encoding = enc->idx;
 		else
@@ -1206,7 +1207,7 @@ static gboolean open_session_file(gchar **tmp, guint len)
 	}
 	else
 	{
-		geany_debug("Could not find file '%s'.", tmp[7]);
+		geany_debug("Could not find file '%s'.", unescaped_filename);
 	}
 
 	g_free(locale_filename);

@@ -1,8 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; geany.nsi - this file is part of Geany, a fast and lightweight IDE
 ;
-; Copyright 2007-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
-; Copyright 2007-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+; Copyright 2007 The Geany contributors
 ;
 ; This program is free software; you can redistribute it and/or modify
 ; it under the terms of the GNU General Public License as published by
@@ -35,7 +34,7 @@ RequestExecutionLevel highest ; set execution level for Windows Vista
 !define PRODUCT_VERSION "@VERSION@"
 !define PRODUCT_VERSION_ID "@VERSION@.0.0"
 !define PRODUCT_PUBLISHER "The Geany developer team"
-!define PRODUCT_WEB_SITE "http://www.geany.org/"
+!define PRODUCT_WEB_SITE "https://www.geany.org/"
 !define PRODUCT_DIR_REGKEY "Software\Geany"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_EXE "$INSTDIR\bin\Geany.exe"
@@ -51,7 +50,7 @@ VIProductVersion "${PRODUCT_VERSION_ID}"
 VIAddVersionKey "ProductName" "${PRODUCT_NAME}"
 VIAddVersionKey "FileVersion" "${PRODUCT_VERSION}"
 VIAddVersionKey "ProductVersion" "${PRODUCT_VERSION}"
-VIAddVersionKey "LegalCopyright" "Copyright 2005-2017 by the Geany developer team"
+VIAddVersionKey "LegalCopyright" "Copyright 2005 The Geany contributors"
 VIAddVersionKey "FileDescription" "${PRODUCT_NAME} Installer"
 
 BrandingText "$(^NAME) installer (NSIS 2.51)"
@@ -235,7 +234,7 @@ Section "GTK ${GTK_VERSION} Runtime Environment" SEC06
 	SetOutPath "$INSTDIR\lib"
 	File /r "gtk\lib\*"
 	SetOutPath "$INSTDIR\share"
-	File /r "gtk\share\*"
+	File /r /x "*.mo" "gtk\share\*"
 SectionEnd
 !endif
 

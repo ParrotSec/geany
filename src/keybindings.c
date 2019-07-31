@@ -1,8 +1,7 @@
 /*
  *      keybindings.c - this file is part of Geany, a fast and lightweight IDE
  *
- *      Copyright 2006-2012 Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
- *      Copyright 2006-2012 Nick Treleaven <nick(dot)treleaven(at)btinternet(dot)com>
+ *      Copyright 2006 The Geany contributors
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -38,6 +37,7 @@
 #include "callbacks.h"
 #include "documentprivate.h"
 #include "filetypes.h"
+#include "geanyobject.h"
 #include "keybindingsprivate.h"
 #include "main.h"
 #include "msgwindow.h"
@@ -110,11 +110,11 @@ static void cb_func_move_tab(guint key_id);
 static void add_popup_menu_accels(void);
 
 
-/** Gets significant modifiers from a GdkModifierType mask. The set of 
- * significant modifiers corresponds to the default modifier mask as returned 
+/** Gets significant modifiers from a GdkModifierType mask. The set of
+ * significant modifiers corresponds to the default modifier mask as returned
  * by @c gtk_accelerator_get_default_mod_mask(). In addition, it improves
  * the Command key handling on OS X by adding @c GEANY_PRIMARY_MOD_MASK
- * when needed. For this reason it is preferred to use this function 
+ * when needed. For this reason it is preferred to use this function
  * instead of @c gtk_accelerator_set_default_mod_mask().
  * @param mods GdkModifierType mask.
  * @return Significant modifiers from the mask.
@@ -665,6 +665,8 @@ static void init_default_kb(void)
 		0, 0, "menu_linebreak", _("Toggle Line breaking"), "line_breaking1");
 	add_kb(group, GEANY_KEYS_DOCUMENT_CLONE, NULL,
 		0, 0, "menu_clone", _("_Clone"), "clone1");
+	add_kb(group, GEANY_KEYS_DOCUMENT_STRIPTRAILINGSPACES, NULL,
+		0, 0, "menu_strip_trailing_spaces", _("_Strip Trailing Spaces"), "strip_trailing_spaces1");
 	add_kb(group, GEANY_KEYS_DOCUMENT_REPLACETABS, NULL,
 		0, 0, "menu_replacetabs", _("Replace tabs with space"), "menu_replace_tabs");
 	add_kb(group, GEANY_KEYS_DOCUMENT_REPLACESPACES, NULL,
@@ -1350,9 +1352,14 @@ static gboolean on_key_press_event(GtkWidget *widget, GdkEventKey *ev, gpointer 
 	GeanyDocument *doc;
 	GeanyKeyGroup *group;
 	GeanyKeyBinding *kb;
+	gboolean key_press_ret;
 
 	if (ev->keyval == 0)
 		return FALSE;
+
+	g_signal_emit_by_name(geany_object, "key-press", ev, &key_press_ret);
+	if (key_press_ret)
+		return TRUE;
 
 	doc = document_get_current();
 	if (doc)
@@ -2483,7 +2490,7 @@ static gboolean cb_func_format_action(guint key_id)
 			editor_indentation_by_one_space(doc->editor, -1, TRUE);
 			break;
 		case GEANY_KEYS_FORMAT_AUTOINDENT:
-			editor_smart_line_indentation(doc->editor, -1);
+			editor_smart_line_indentation(doc->editor);
 			break;
 		case GEANY_KEYS_FORMAT_TOGGLECASE:
 			on_toggle_case1_activate(NULL, NULL);
@@ -2625,6 +2632,9 @@ static gboolean cb_func_document_action(guint key_id)
 		case GEANY_KEYS_DOCUMENT_REMOVE_MARKERS_INDICATORS:
 			on_remove_markers1_activate(NULL, NULL);
 			on_menu_remove_indicators1_activate(NULL, NULL);
+			break;
+		case GEANY_KEYS_DOCUMENT_STRIPTRAILINGSPACES:
+			editor_strip_trailing_spaces(doc->editor, FALSE);
 			break;
 	}
 	return TRUE;
