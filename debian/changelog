@@ -1,9 +1,8 @@
-geany (1.35-1parrot1) rolling; urgency=medium
+geany (1.36-1) unstable; urgency=medium
 
-  * Import new Debian version.
-  * Update Parrot OS templates and customizations.
+  * [6f3ec40] New upstream version 1.36
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 31 Jul 2019 18:26:13 +0200
+ -- Chow Loong Jin <hyperair@debian.org>  Wed, 20 Nov 2019 11:56:18 +0800
 
 geany (1.35-1) unstable; urgency=medium
 
@@ -20,13 +19,6 @@ geany (1.34.1-1) unstable; urgency=medium
   * [a70a99b] New upstream version 1.34.1
 
  -- Chow Loong Jin <hyperair@debian.org>  Wed, 30 Jan 2019 14:22:58 +0800
-
-geany (1.33-1parrot1) testing; urgency=medium
-
-  * Import new Debian version.
-  * Import Parrot patches.
-
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 25 Apr 2018 10:33:38 +0200
 
 geany (1.33-1) unstable; urgency=medium
 
@@ -51,56 +43,46 @@ geany (1.32-1) unstable; urgency=medium
 
  -- Chow Loong Jin <hyperair@debian.org>  Sun, 24 Dec 2017 18:09:25 +0800
 
-geany (1.31-1parrot2) testing; urgency=medium
+geany (1.31-1) unstable; urgency=medium
 
-  * Rebuild package.
+  * [515429f] New upstream version 1.31
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 04 Aug 2017 14:28:36 +0200
+ -- Chow Loong Jin <hyperair@debian.org>  Sat, 22 Jul 2017 00:58:52 +0800
 
-geany (1.31-1parrot1) testing; urgency=medium
+geany (1.30.1-1) experimental; urgency=medium
 
-  * Fix BinNMU version in dependencies.
+  * [187ca62] Imported Upstream version 1.30.1
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 04 Aug 2017 13:01:18 +0200
+ -- Chow Loong Jin <hyperair@debian.org>  Tue, 21 Mar 2017 18:07:41 +0800
 
-geany (1.31-1parrot0) testing; urgency=medium
+geany (1.30-1) experimental; urgency=medium
 
-  * Import new upstream release.
+  * [1498191] Imported Upstream version 1.30
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 03 Aug 2017 03:43:50 +0200
+ -- Chow Loong Jin <hyperair@debian.org>  Mon, 13 Mar 2017 12:08:52 +0800
 
-geany (1.29-1parrot4) testing; urgency=medium
+geany (1.29-1) unstable; urgency=medium
 
-  * Add parrot templates to Makefile.am
+  [ Evgeni Golov ]
+  * [dffc7cc] New upstream version 1.29
+  * [bbd23eb] drop 30_fix_invisible_fields_with_gtk3.patch, applied upstream
+  * [c6cfa9c] update conf.c location in 20_debian_control_tags.patch
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 30 Dec 2016 12:24:29 +0100
+  [ Chow Loong Jin ]
+  * [ffd5baf] Drop vStringTerminate
 
-geany (1.29-1parrot3.1) testing; urgency=medium
+ -- Chow Loong Jin <hyperair@debian.org>  Wed, 16 Nov 2016 22:55:28 +0800
 
-  * Add parrot templates to makefile
+geany (1.28-2) unstable; urgency=medium
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 29 Dec 2016 22:50:44 +0100
+  * Custom theming fixes for Adwaita 3.20/GTK 3.20 (Closes: #835370)
+  * drop des@ from uploaders (Closes: #838044)
+  * mark geany-common Multi-Arch: foreign (closes: 813757)
 
-geany (1.29-1parrot2) testing; urgency=medium
+ -- Evgeni Golov <evgeni@debian.org>  Fri, 23 Sep 2016 16:21:07 +0200
 
-  * Fix missing parrot themes
+geany (1.28-1) unstable; urgency=medium
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 27 Dec 2016 17:26:42 +0100
-
-geany (1.29-1parrot1) testing; urgency=medium
-
-  * Rebuild to fix minor bugs
-
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 27 Dec 2016 00:36:13 +0100
-
-geany (1.29-1parrot0) testing; urgency=medium
-
-  * New upstream version 1.29
-  * Fix patches
-
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Sun, 27 Nov 2016 01:32:30 +0100
-
-geany (1.28-1parrot0) testing; urgency=medium
   [ Chow Loong Jin ]
   * [7f7df81] Imported Upstream version 1.28
 
@@ -108,18 +90,7 @@ geany (1.28-1parrot0) testing; urgency=medium
   * [2c63766] use canonical https urls for Vcs-* fields
   * [788dcb0] Standards-Version: 3.9.8
 
-  [Lorenzo Faletra]
-  * Import new upstream release
-  * Reimport old parrot patches
-  * Add Rust template
-
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 30 Aug 2016 16:19:28 +0200
-
-geany (1.27-1parrot0) testing; urgency=medium
-
-  * Patched with Parrot Security themes
-
- -- Lorenzo "Palinuro" Faletra <palinuro@frozenbox.org>  Sat, 19 Mar 2016 13:53:20 +0100
+ -- Evgeni Golov <evgeni@debian.org>  Mon, 22 Aug 2016 20:39:29 +0200
 
 geany (1.27-1) unstable; urgency=medium
 
