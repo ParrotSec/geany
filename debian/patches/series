@@ -4,3 +4,4 @@
 20_use_sensible_browser.patch
 20_load_plugins_from_all_paths.patch
 20_use_x_terminal_emulator.patch
+99_parrot-addons.patch
